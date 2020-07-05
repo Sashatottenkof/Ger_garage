@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Update user</title>
+</head>
+<body>
+  <h1>Update</h1>
+        <h2>User Details</h2>
+        <!-- 
+            Set the action attribute to "/exercise12/saveCustomer.html", and use
+            th:object to bind the ${customer} variable as the form-backing bean. 
+        -->
+ 
+    <form action="#" th:action="@{/user/update/{id}(id=${userId.id})}" th:object="${userId}" method="post">
+    <label for="username">UserName</label>
+    <input type="text" th:field="*{username}"placeholder="Name">
+    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+
+
+    
+     <label for="password">Password</label>
+    <input type="text" th:field="*{password}" placeholder="Password">
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+ 
+    
+     <label for="first_name">First Name</label>
+    <input type="text" th:field="*{first_name}" placeholder="First Name">
+    <p th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}"></p>
+
+     
+     <label for="last_name">Last Name</label>
+    <input type="text" th:field="*{last_name}" placeholder="Last Name">
+    <p th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}"></p>
+
+    
+      <label >Gender</label>
+      <select th:field="${userId.gender}">
+  <option th:each="gender : ${T(finalproject.Ger_garage.UserDetails.Gender).values()}" 
+          th:value="${gender}" 
+          th:text="${gender.displayGender}">
+          </option>
+</select>
+   
+        <label for="phone_number">Phone</label>
+    <input type="tel" th:field="*{phone_number}" placeholder="phone number">
+    <p th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}"></p>
+     
+        
+       <label for="date_of_birth">Birthday</label>
+    <input type="date" th:field="*{date_of_birth}" placeholder="dd-mm-yyyy">
+    <p th:if="${#fields.hasErrors('date_of_birth')}" th:errors="*{date_of_birth}"></p>
+   <!--  <p class="error" th:errors="*{date_of_birth}"><p> -->
+     
+    <input type="submit" value="Update">   
+</form>
+</body>
+</html>
