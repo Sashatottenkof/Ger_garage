@@ -13,11 +13,22 @@ repositories {
 }
 
 dependencies {
+    
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// to connect to database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//To use @valid annotations 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// To use Spring Boot security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	runtimeOnly 'mysql:mysql-connector-java'
+	
+	//Thymeleaf security requered for rendering authentificated user on html page
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	
+	 developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	  
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
