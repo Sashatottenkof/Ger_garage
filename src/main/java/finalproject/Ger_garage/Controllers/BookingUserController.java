@@ -61,23 +61,9 @@ public class BookingUserController {
 	 */
 	@GetMapping("book")
 	public String displayBookingForm(Model model, Principal principal) {
-//		Set<String> vehicles;
+
 		User user = userRepository.findByEmail(principal.getName());
-//		Vehicle vehicle = vehicleRepository.findByUserId(user.getId());
-//		Collection<Vehicle> vehicleCollection = vehicleRepository.findByUserId(user.getId());
-//		Map<String,Integer> vehicleMap = new HashMap<String,Integer>();
-//		if( vehicleCollection != null && !vehicleCollection.isEmpty()){
-//		     for(Vehicle eachVehicle : vehicleCollection ){
-//		         if(eachVehicle != null){
-//		        	 vehicleMap.put(eachVehicle.getModel(), eachVehicle.getVehicle_id());
-//		        }
-//		     }
-//		  }
 		model.addAttribute("booking",new Booking());
-//		model.addAttribute("vehicle", vehicle);
-//		vehicles = vehicleMap.keySet(); 
-//		model.addAttribute("vehicle",new Vehicle());
-//		model.addAttribute("userVehicle", vehicleRepository.findByUserId(user.getId()));
 		model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
 		return "user/booking-form";
 	}
@@ -93,34 +79,9 @@ public class BookingUserController {
 	@PostMapping("book")
 	public String newBooking(@ModelAttribute("booking") @Valid Booking booking, Errors errors,  Model model, Principal principal) {
 
-
-		
-//		Vehicle vehicle = booking.getVehicle();
-//
-//
-//		Vehicle newVehicle = new Vehicle(vehicle.getVehicle_id(), null, null, null, null, null, null, null, null, null);
-//		booking.setVehicle(newVehicle);
-		
-//		Collection<Integer> vehicles;
-//		User user = userRepository.findByEmail(principal.getName());
-//		Collection<Vehicle> vehicleCollection = vehicleRepository.findByUserId(user.getId());
-//		Map<String,Integer> vehicleMap = new HashMap<String,Integer>();
-//		if( vehicleCollection != null && !vehicleCollection.isEmpty()){
-//		     for(Vehicle eachVehicle : vehicleCollection ){
-//		         if(eachVehicle != null){
-//		        	 vehicleMap.put(eachVehicle.getModel(), eachVehicle.getVehicle_id());
-//		        }
-//		     }
-//		  }
-//		
-//		vehicles = vehicleMap.values(); 
 		
 		User user = userRepository.findByEmail(principal.getName());
 
-//		Optional<Vehicle> vehicle =  vehicleRepository.findById(booking.getVehicle().getVehicle_id());
-		
-		
-		
 //	    if(errors.hasErrors()) {
 //			return "/user/booking-form";
 //		}
