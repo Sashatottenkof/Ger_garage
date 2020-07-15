@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<link th:href="@{/bootstrup.css}" rel="stylesheet">
+<title>Log In</title>
+</head>
+<body>
+
+
+<form  th:action="@{/login}" method="post">
+  <div class="form-group">
+   <div th:if="${param.error}">
+      <div class="alert alert-danger">Invalid email or
+       password.</div>
+     </div>
+     <div th:if="${param.logout}">
+      <div class="alert alert-info">You have been logged out.</div>
+     </div>
+    <label for="email">Email</label>
+    <input  type="email" name="username" class="form-control" id="formGroupExampleInput" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password"  class="form-control" id="formGroupExampleInput2" placeholder="Password">
+  </div>
+      <div class="form-group col-xs-offset-8 col-xs-4">
+        <button type="submit" class="btn btn-primary btn-block btn-flat">LogIn</button>
+       </div>
+</form>
+ <div class="form-group">
+      <span>New user? <a href="/" th:href="@{/signup}">Register
+        here</a></span>
+     </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8">
+<link th:href="@{/bootstrup.css}" rel="stylesheet">
+<title>Add booking</title>
+</head>
+<body>
+  <nav th:replace= "fragments :: navigation" ></nav>
+  
+      <form action="#" th:action="@{/user/book}"  method="post">
+   
+        <label >Type of Service</label>
+      <select th:field="${booking.type}">
+  <option th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
+          th:value="${typeService}"
+          th:text="${typeService.displayServiceType}">
+          </option>
+</select>
+        <label>Date</label>
+    <input type="date" th:field="${booking.date}" placeholder="date">
+    <p th:if="${#fields.hasErrors('booking.date')}" th:errors="${booking.date}"></p>
+
+<!--          <label>Vehicle</label>-->
+<!--         <input type="hidden" th:field="${booking.vehicle}">&ndash;&gt;-->
+<!--          <input type="hidden" id="booking.vehicle" name="booking.vehicle" th:value="${userVehicle.vehicle_id}" />-->
+<!--          <p th:if="${#fields.hasErrors('booking.vehicle')}" th:errors="${booking.vehicle}"></p>-->
+
+       <label >Vehicle</label>
+      <select  th:field="${booking.vehicleId}">
+  <option
+          th:each="vehicle : ${userVehicles}"
+          th:value="${vehicle.vehicle_id}"
+          th:text="${vehicle.model}">
+          </option>
+</select>
+
+<!--     <label >Vehicle</label>-->
+<!--      <select th:field="${vehicleId}" th:value="${booking.vehicle}">-->
+<!--  <option th:each="vehicleUser : ${userVehicles}"-->
+<!--          th:value="${vehicleUser.vehicle_id}"-->
+<!--          th:text="${vehicleUser.model}">-->
+
+<!--          </option>-->
+<!--</select>-->
+    
+
+
+     <label>Comments</label>
+    <input type="text" th:field="${booking.comment}" placeholder="comment">
+    <p th:if="${#fields.hasErrors('booking.comment')}" th:errors="${booking.comment}"></p>
+ 
+
+     
+ 
+     
+    <input type="submit" value="To book">   
+</form>
+  
+  
+</body>
+</html>
