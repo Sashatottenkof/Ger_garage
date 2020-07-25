@@ -3,7 +3,6 @@ package finalproject.Ger_garage.Controllers;
 import java.util.Arrays;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import finalproject.Ger_garage.Enums.Gender;
 import finalproject.Ger_garage.Models.Role;
 import finalproject.Ger_garage.Models.User;
 import finalproject.Ger_garage.Repositories.UserRepository;

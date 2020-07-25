@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/bootstrup.css}" rel="stylesheet">
+    <title>All bookings</title>
+</head>
+<body>
+<h1>All Bookings</h1>
+
+
+<nav th:replace= "fragments :: navigation" ></nav>
+<div>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Vehicle</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Comments</th>
+            <th>Status</th>
+            <th>Mechanic</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.type}"></td>
+            <td th:text="${booking.vehicle.model}"></td>
+            <td th:text="${booking.user.first_name + ' ' + booking.user.last_name}"></td>
+            <td th:text="${booking.bookingDate.date}"></td>
+            <td th:text="${booking.bookingDate.time}"></td>
+            <td th:text="${booking.comment}"></td>
+            <td th:text="${booking.status}"></td>
+            <td th:text="${booking.mechanic.firstName + ' ' + booking.mechanic.lastName}" th:unless="${booking.mechanic == null}"></td>
+            <td th:text="${booking.price}"></td>
+           <td><a th:href="@{/admin/booking-details/{id}(id=${booking.id})}">View Details</a></td>
+        </tr>
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+<div >
+
+
+
+</div>
+</body>
+</html>

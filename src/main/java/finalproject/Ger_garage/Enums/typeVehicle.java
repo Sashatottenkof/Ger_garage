@@ -6,9 +6,10 @@ public enum typeVehicle {
 	ROADSTER("Roadster"),
 	MINIVAN("Minivan"),
 	COUPE("Coupe"),
-	LIMOUSINE("Limousine");
-	
-	
+	LIMOUSINE("Limousine"),
+	MINIBUS ("Minibus"),
+	MOTORBIKE ("Motorbike");
+
 	private String displayType;
 
 	private typeVehicle(String displayType) {

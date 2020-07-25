@@ -12,6 +12,7 @@ import finalproject.Ger_garage.Models.Vehicle;
 public interface VehicleRepository extends CrudRepository<Vehicle, Integer>{
 
 	public Collection<Vehicle> findByUserId(Integer userId);
+//	public  Vehicle findByBookingId(Integer bookingId);
 //	public Vehicle findByUserId(Integer userId);
 
 }

@@ -21,8 +21,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         <th>Type</th>
         <th>Vehicle</th>
         <th>Date</th>
+          <th>Time</th>
         <th>Comments</th>
         <th>Status</th>
+          <th>Price</th>
       </tr>
     </thead>
     <tbody>
@@ -30,19 +32,24 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         <tr th:each="booking : ${userBookings}"> 
        <td th:text="${booking.id}"></td>
         <td th:text="${booking.type}"></td>
-        <td th:text="${booking.vehicle}"></td>
-        <td th:text="${booking.date}"></td>
+        <td th:text="${booking.vehicle.model}"></td>
+        <td th:text="${booking.bookingDate.date}"></td>
+            <td th:text="${booking.bookingDate.time}"></td>
         <td th:text="${booking.comment}"></td>
         <td th:text="${booking.status}"></td>
-	     <td>
-	    <!--<form th:action="@{/user/vehicle/delete}"  method ="post">
-	    <input type="hidden" name= "id" th:value= "${vehicle.vehicle_id}">
-	    <input type="submit" value = "Delete">
-	     </form>-->
-	    </td>
+            <td th:text="${booking.price}"></td>
+        </tr>
+<!--        <td th:text="${vehicle.vehicle_id}"></td>-->
+
+<!--	     <td>-->
+<!--	    &lt;!&ndash;<form th:action="@{/user/vehicle/delete}"  method ="post">-->
+<!--	    <input type="hidden" name= "id" th:value= "${vehicle.vehicle_id}">-->
+<!--	    <input type="submit" value = "Delete">-->
+<!--	     </form>&ndash;&gt;-->
+<!--	    </td>-->
 
 	  <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-      </tr>
+
     </tbody>
     
   </table>

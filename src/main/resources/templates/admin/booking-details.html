@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/bootstrup.css}" rel="stylesheet">
+    <title>Booking</title>
+</head>
+<body>
+<h1>Booking</h1>
+
+
+<nav th:replace="fragments :: navigation"></nav>
+<div>
+
+    <form action="#" th:action="@{/admin/update}" method="post">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Vehicle</th>
+                <th>Customer ID</th>
+                <th>Customer First Name</th>
+                <th>Customer Last Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Comments</th>
+                <th>Status</th>
+                <th>Mechanic</th>
+                <th>Additional Items</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td th:text="${booking.id}"></td>
+                <input type="hidden" th:field="${booking.id}">
+                <td th:text="${booking.type}"></td>
+                <input type="hidden" th:field="${booking.type}">
+                <td th:text="${booking.vehicle.model}"></td>
+                <input type="hidden" th:field="${booking.vehicle.vehicle_id}">
+                <td th:text="${booking.user.id}"></td>
+                <input type="hidden" th:field="${booking.user.id}">
+                <td th:text="${booking.user.first_name}"></td>
+                <input type="hidden" th:field="${booking.user.first_name}">
+                <td th:text="${booking.user.last_name}"></td>
+                <input type="hidden" th:field="${booking.user.last_name}">
+                <td th:text="${booking.bookingDate.date}"></td>
+                <input type="hidden" th:field="${booking.bookingDate.date}">
+                <td th:text="${booking.bookingDate.time}"></td>
+                <input type="hidden" th:field="${booking.bookingDate.time}">
+                <td th:text="${booking.comment}"></td>
+                <input type="hidden" th:field="${booking.comment}">
+                <td>
+                    <select th:field="${booking.status}">
+                        <option th:each="BookingStatus : ${T(finalproject.Ger_garage.Enums.BookingStatus).values()}"
+                                th:value="${BookingStatus}"
+                                th:text="${BookingStatus.displayBookingStatus}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select th:field="${booking.mechanic.id}">
+                        <option th:each="mechanic : ${mechanics}"
+                                th:value="${mechanic.id}"
+                                th:text="${mechanic.firstName + ' ' + mechanic.lastName}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr th:each="item : ${booking.items}">
+                            <td th:text="${item.id}"></td>
+                            <td th:text="${item.name}"></td>
+                            <td th:text="${item.price}"></td>
+                            <td><a th:href="@{/admin/deleteitem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Remove</a></td>
+<!--                            <input type="hidden" th:field="*{booking[__${item.index}__].items}">-->
+                        </tr>
+                    </table>
+                </td>
+
+
+                <td th:text="${booking.price}"></td>
+                <input type="hidden" th:field="${booking.price}">
+<!--                *{rows[__${rowStat.index}__].seedsPerCell}-->
+                <td><input type="submit" value="Update"></td>
+
+            </tr>
+
+
+            </tbody>
+
+        </table>
+    </form>
+
+
+</div>
+
+
+<div>
+
+    <!--<form  action="#" th:action="@{/admin/additem/{id}(id=${booking.id})}"   method="post">-->
+    <!--    <table>-->
+    <!--        <thead>-->
+    <!--        <tr>-->
+    <!--            <th>ID</th>-->
+    <!--            <th>Nme</th>-->
+    <!--            <th>Price</th>-->
+    <!--            <th>Action</th>-->
+    <!--        </tr>-->
+    <!--        </thead>-->
+    <!--        <tbody>-->
+
+    <!--        <tr th:each="itemt : ${items}">-->
+    <!--            <td th:text="${itemt.id}"></td>-->
+    <!--&lt;!&ndash;            <input type="hidden"  th:field="${item.id}" >&ndash;&gt;-->
+    <!--            <input type="hidden"  id="${item.id}"  name="${item.id}" th:attr="value = ${itemt.id}" >-->
+    <!--            <td th:text="${itemt.name}"></td>-->
+    <!--&lt;!&ndash;            <input type="hidden" th:field="${item.name}" >&ndash;&gt;-->
+    <!--            <input type="hidden"  id="${item.name}" name="${item.name}" th:attr="value = ${itemt.name}" >-->
+    <!--            <td th:text="${itemt.price}"></td>-->
+    <!--&lt;!&ndash;            <input type="hidden" th:field="${item.price}" >&ndash;&gt;-->
+    <!--            <input type="hidden"  id="${item.price}" name="${item.price}" th:attr="value = ${itemt.price}" >-->
+    <!--            <td><input type="submit" value="Add"></td>-->
+    <!--        </tr>-->
+
+
+    <!--        </tbody>-->
+
+    <!--    </table>-->
+
+    <!--</form>-->
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nme</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            <td><a th:href="@{/admin/additem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Add</a></td>
+        </tr>
+
+
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>

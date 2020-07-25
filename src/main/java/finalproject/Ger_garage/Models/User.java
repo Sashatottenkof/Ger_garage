@@ -206,24 +206,4 @@ public class User {
 				+ update_time + ", roles=" + roles + "]";
 	}
 
-
-	
-	
-	
-    
-//    @OneToMany
-// @JoinColumn(name = "VEHICLE_ID")
-//    private List <Vehicle> vehicle = new ArrayList<Vehicle>();
-    
-
-    
-
-
-//	public List <Vehicle> getVehicle() {
-//		return vehicle;
-//	}
-//
-//	public void setVehicle(List <Vehicle> vehicle) {
-//		this.vehicle = vehicle;
-//	}
 }

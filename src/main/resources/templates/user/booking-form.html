@@ -4,6 +4,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8">
 <link th:href="@{/bootstrup.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/script.js}"></script>
 <title>Add booking</title>
 </head>
 <body>
@@ -12,52 +13,49 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
       <form action="#" th:action="@{/user/book}"  method="post">
    
         <label >Type of Service</label>
-      <select th:field="${booking.type}">
-  <option th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
+      <select  th:field="${booking.type}">
+          <option  th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
           th:value="${typeService}"
           th:text="${typeService.displayServiceType}">
           </option>
+
 </select>
+
         <label>Date</label>
-    <input type="date" th:field="${booking.date}" placeholder="date">
-    <p th:if="${#fields.hasErrors('booking.date')}" th:errors="${booking.date}"></p>
+         <input type="date" th:field="${booking.bookingDate.date}" placeholder="date">
+    <p th:if="${#fields.hasErrors('booking.bookingDate.date')}" th:errors="${booking.bookingDate.date}"></p>
 
-<!--          <label>Vehicle</label>-->
-<!--         <input type="hidden" th:field="${booking.vehicle}">&ndash;&gt;-->
-<!--          <input type="hidden" id="booking.vehicle" name="booking.vehicle" th:value="${userVehicle.vehicle_id}" />-->
-<!--          <p th:if="${#fields.hasErrors('booking.vehicle')}" th:errors="${booking.vehicle}"></p>-->
+          <select th:field="${booking.bookingDate.time}">
+              <option  th:each="time : ${availableTime}"
+                      th:value="${time}"
+                      th:text="${time}">
+              </option>
+          </select>
 
-       <label >Vehicle</label>
-      <select  th:field="${booking.vehicleId}">
-  <option
-          th:each="vehicle : ${userVehicles}"
+          <p th:if="${#fields.hasErrors('booking.bookingDate.time')}" th:errors="${booking.bookingDate.time}"></p>
+
+      <select th:field="${booking.vehicle.vehicle_id}">
+  <option  th:each="vehicle : ${userVehicles}"
           th:value="${vehicle.vehicle_id}"
           th:text="${vehicle.model}">
+
           </option>
 </select>
-
-<!--     <label >Vehicle</label>-->
-<!--      <select th:field="${vehicleId}" th:value="${booking.vehicle}">-->
-<!--  <option th:each="vehicleUser : ${userVehicles}"-->
-<!--          th:value="${vehicleUser.vehicle_id}"-->
-<!--          th:text="${vehicleUser.model}">-->
-
-<!--          </option>-->
-<!--</select>-->
     
 
 
      <label>Comments</label>
     <input type="text" th:field="${booking.comment}" placeholder="comment">
     <p th:if="${#fields.hasErrors('booking.comment')}" th:errors="${booking.comment}"></p>
- 
 
+          <label>Price</label>
+          <p th:field="${booking.price}"></p>
      
  
      
     <input type="submit" value="To book">   
 </form>
-  
-  
+
+
 </body>
 </html>

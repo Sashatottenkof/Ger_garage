@@ -57,14 +57,15 @@ public class VehicleController {
 		return "/user/vehicle-form";
 	}
 
+
 	/**
 	 * adds new vehicle
-	 * 
 	 * @param vehicle
 	 * @param errors
 	 * @param principal
 	 * @return
 	 */
+
 	@PostMapping("vehicle")
 	public String addVehicle(@ModelAttribute @Valid Vehicle vehicle, Errors errors, Principal principal) {
 

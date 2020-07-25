@@ -1,11 +1,19 @@
 package finalproject.Ger_garage.Models;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.core.SpringVersion;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import finalproject.Ger_garage.Enums.BookingStatus;
@@ -16,164 +24,168 @@ import finalproject.Ger_garage.Enums.ServiceType;
 @Table(name = "BOOKING_REQUEST")
 public class Booking {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private ServiceType type;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private BookingStatus status;
-	
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ServiceType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookingStatus status;
 
 
-	@ManyToOne
-	@JoinColumn(name = "USER_ID", nullable = false)
-	private User user;
-	
-	@ManyToOne()
-	@JoinColumn(name = "VEHICLE_ID")
-	private Vehicle vehicle;
-	
-	@OneToOne
-	@JoinColumn(name = "MECHANIC_ID")
-	private Mechanic mechanic;
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Choose your day of service")
-	private Date date;
-	
-	@Lob
-	private String comment;
-	@Transient
-	Integer vehicleId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
-	public Booking() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @ManyToOne
+    @JoinColumn(name = "VEHICLE_ID", nullable = false)
+    private Vehicle vehicle;
 
-	public Booking(Integer id, ServiceType type, BookingStatus status, User user, Vehicle vehicle, Mechanic mechanic,
-			@NotNull(message = "Choose your day of service") Date date, String comment,Integer vehicleId) {
-		super();
-		this.id = id;
-		this.type = type;
-		this.status = status;
-		this.user = user;
-		this.vehicle = vehicle;
-		this.mechanic = mechanic;
-		this.date = date;
-		this.comment = comment;
-		this.vehicleId = vehicleId;
-	}
+    @ManyToOne
+    @JoinColumn(name = "MECHANIC_ID")
+    private Mechanic mechanic;
 
-	public Integer getId() {
-		return id;
-	}
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Embedded
+    @Valid
+    //@NotNull(message = "Choose your day of service")
+    private BookingDate bookingDate;
 
-	public ServiceType getType() {
-		return type;
-	}
+    @Lob
+    private String comment;
 
-	public void setType(ServiceType type) {
-		this.type = type;
-	}
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(
+            name = "items",
+            joinColumns = @JoinColumn(
+                    name = "booking_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "item_id", referencedColumnName = "id"))
+    private Collection<Item> items = new ArrayList<>();
 
-	public BookingStatus getStatus() {
-		return status;
-	}
+     private double price;
 
-	public void setStatus(BookingStatus status) {
-		this.status = status;
-	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Booking() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
+    public Booking(Integer id, ServiceType type, BookingStatus status, User user, Vehicle vehicle, Mechanic mechanic, @Valid BookingDate bookingDate, String comment, Collection<Item> items, double price) {
+        this.id = id;
+        this.type = type;
+        this.status = status;
+        this.user = user;
+        this.vehicle = vehicle;
+        this.mechanic = mechanic;
+        this.bookingDate = bookingDate;
+        this.comment = comment;
+        this.items = items;
+        this.price = price;
+    }
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Mechanic getMechanic() {
-		return mechanic;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setMechanic(Mechanic mechanic) {
-		this.mechanic = mechanic;
-	}
+    public ServiceType getType() {
+        return type;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public void setType(ServiceType type) {
+        this.type = type;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public BookingStatus getStatus() {
+        return status;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public Integer getVehicleId() {
-		return vehicleId;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setVehicleId(Integer vehicleId) {
-		this.vehicleId = vehicleId;
-	}
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Booking booking = (Booking) o;
-		return Objects.equals(id, booking.id) &&
-				type == booking.type &&
-				status == booking.status &&
-				Objects.equals(user, booking.user) &&
-				Objects.equals(vehicle, booking.vehicle) &&
-				Objects.equals(mechanic, booking.mechanic) &&
-				Objects.equals(date, booking.date) &&
-				Objects.equals(comment, booking.comment);
-	}
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, type, status, user, vehicle, mechanic, date, comment);
-	}
+    public Mechanic getMechanic() {
+        return mechanic;
+    }
 
-	@Override
-	public String toString() {
-		return "Booking{" +
-				"id=" + id +
-				", type=" + type +
-				", status=" + status +
-				", user=" + user +
-				", vehicle=" + vehicle +
-				", mechanic=" + mechanic +
-				", date=" + date +
-				", comment='" + comment + '\'' +
-				'}';
-	}
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
+    }
+
+    public BookingDate getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(BookingDate bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public LocalDate getDate(){return getBookingDate().getDate();};
+    public LocalTime getTime(){return getBookingDate().getTime();};
+
+    public Collection<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Collection<Item> items) {
+        this.items = items;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", type=" + type +
+                ", status=" + status +
+                ", user=" + user +
+                ", vehicle=" + vehicle +
+                ", mechanic=" + mechanic +
+                ", bookingDate=" + bookingDate +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
