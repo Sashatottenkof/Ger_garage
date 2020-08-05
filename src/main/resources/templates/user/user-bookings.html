@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="utf-8">
-<link th:href="@{/bootstrup.css}" rel="stylesheet">
-<title>User's bookings</title>
+    <meta charset="utf-8">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
+    <title>User's bookings</title>
 </head>
 <body>
-  <h1>User's bookings</h1>
-       
-        
-        <nav th:replace= "fragments :: navigation" ></nav>
- <div>
-    
-  
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Vehicle</th>
-        <th>Date</th>
-          <th>Time</th>
-        <th>Comments</th>
-        <th>Status</th>
-          <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-        <tr th:each="booking : ${userBookings}"> 
-       <td th:text="${booking.id}"></td>
-        <td th:text="${booking.type}"></td>
-        <td th:text="${booking.vehicle.model}"></td>
-        <td th:text="${booking.bookingDate.date}"></td>
-            <td th:text="${booking.bookingDate.time}"></td>
-        <td th:text="${booking.comment}"></td>
-        <td th:text="${booking.status}"></td>
-            <td th:text="${booking.price}"></td>
+
+
+<header th:replace="fragments :: navigation"></header>
+<h1>User's bookings</h1>
+<div th:unless="${userBookings.empty}">
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Vehicle</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Comments</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Details</th>
         </tr>
-<!--        <td th:text="${vehicle.vehicle_id}"></td>-->
+        </thead>
+        <tbody>
 
-<!--	     <td>-->
-<!--	    &lt;!&ndash;<form th:action="@{/user/vehicle/delete}"  method ="post">-->
-<!--	    <input type="hidden" name= "id" th:value= "${vehicle.vehicle_id}">-->
-<!--	    <input type="submit" value = "Delete">-->
-<!--	     </form>&ndash;&gt;-->
-<!--	    </td>-->
+        <tr th:each="booking : ${userBookings}">
+            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.type}"></td>
+            <td th:text="${booking.vehicle.model}"></td>
+            <td th:text="${booking.bookingDate.date}"></td>
+            <td th:text="${booking.bookingDate.time}"></td>
+            <td th:text="${booking.comment}"></td>
+            <td th:text="${booking.status}"></td>
+            <td th:text="${booking.price}"></td>
+            <div th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COMPLETED}">
+                <td><a th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
+            </div>
+            <div th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COLLECTED}">
+                <td><a th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
+            </div>
+            <a th:href="@{/user/receipt/{id}(id=${booking.id})}">test</a>
+        </tr>
 
-	  <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
+        <!--        <td th:text="${vehicle.vehicle_id}"></td>-->
 
-    </tbody>
-    
-  </table>
+        <!--	     <td>-->
+        <!--	    &lt;!&ndash;<form th:action="@{/user/vehicle/delete}"  method ="post">-->
+        <!--	    <input type="hidden" name= "id" th:value= "${vehicle.vehicle_id}">-->
+        <!--	    <input type="submit" value = "Delete">-->
+        <!--	     </form>&ndash;&gt;-->
+        <!--	    </td>-->
+
+        <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
+
+        </tbody>
+
+    </table>
 </div>
 
+<div th:unless="${!userBookings.empty}">
 
+    <p> You don't have any bookings</p>
+    <a th:href="@{/user/book/}">Book a Service</a>
 
+</div>
+<div>
+    <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
 
-<div >
-         <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
-        
-        
-         
-     </div>
+</div>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

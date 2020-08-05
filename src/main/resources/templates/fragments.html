@@ -1,26 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="utf-8">
-<title>fragment</title>
+    <meta charset="utf-8">
+    <title>fragment</title>
 </head>
 <body>
 
-	<nav th:fragment="navigation">
-		<ul>
-			<li><a href="/admin/users"> Users</a></li>
-			<li><a href="/admin/bookings">All Bookings</a></li>
-			<li><a href="/signup">Sign Up</a></li>
-			<li><a href="/user/details/">User details</a></li>
-			<li><a href="/user/update">Update User</a></li>
-			<li><a href="/user/vehicles">My vehicles</a></li>
-			<li><a href="/user/bookings">My bookings</a></li>
-			<li><a href="/user/book">Make a bookings</a></li>
-			<li><a href="/login">Log In</a></li>
-		</ul>
+<header th:fragment="navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ger's Garage</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/calendar">Calendar</a>
+                        </li>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/users">Users</a>
+                        </li>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/bookings">All Bookings</a>
+                        </li>
+                    </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/details/">User Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/vehicles">My Vehicles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/bookings">My Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/book">Make a Booking</a>
+                    </li>
+
+                    <div sec:authorize="isAnonymous()">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup">Sign Up</a>
+                        </li>
+                    </div>
+
+                    <div sec:authorize="isAnonymous()">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Log In</a>
+                        </li>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Log Out</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 
-	</nav>
+    <header class="py-5 bg-image-full" style="background-image: url('/images/headerImage.jpg');">
+    </header>
+
+</header>
+
+
+<footer th:fragment="footer" id="footer" class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Contacts</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!--	<nav th:fragment="navigation">-->
+<!--		<ul>-->
+<!--			<li><a href="/admin/users"> Users</a></li>-->
+<!--			<li><a href="/admin/bookings">All Bookings</a></li>-->
+<!--			<li><a href="/signup">Sign Up</a></li>-->
+<!--			<li><a href="/user/details/">User details</a></li>-->
+<!--			<li><a href="/user/update">Update User</a></li>-->
+<!--			<li><a href="/user/vehicles">My vehicles</a></li>-->
+<!--			<li><a href="/user/bookings">My bookings</a></li>-->
+<!--			<li><a href="/user/book">Make a bookings</a></li>-->
+<!--			<li><a href="/login">Log In</a></li>-->
+<!--		</ul>-->
+
+
+<!--	</nav>-->
 
 </body>
 </html>

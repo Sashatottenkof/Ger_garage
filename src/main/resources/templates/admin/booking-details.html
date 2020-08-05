@@ -3,18 +3,22 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/bootstrup.css}" rel="stylesheet">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
     <title>Booking</title>
 </head>
 <body>
-<h1>Booking</h1>
 
 
-<nav th:replace="fragments :: navigation"></nav>
+
+<header th:replace="fragments :: navigation"></header>
+
+<h1 th:text="${booking.id}"></h1>
 <div>
 
     <form action="#" th:action="@{/admin/update}" method="post">
-        <table>
+        <table class="table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -71,7 +75,7 @@
                     </select>
                 </td>
                 <td>
-                    <table>
+                    <table class="table">
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -140,7 +144,7 @@
     <!--</form>-->
 
 
-    <table>
+    <table class="table">
         <thead>
         <tr>
             <th>ID</th>
@@ -164,5 +168,7 @@
     </table>
 
 </div>
+
+<footer th:replace="fragments :: footer" ></footer>
 </body>
 </html>

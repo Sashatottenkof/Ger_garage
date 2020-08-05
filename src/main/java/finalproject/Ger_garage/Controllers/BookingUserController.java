@@ -3,11 +3,11 @@ package finalproject.Ger_garage.Controllers;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
+
 import javax.validation.Valid;
 
-import finalproject.Ger_garage.DeafultData.CalendarData;
-import finalproject.Ger_garage.Enums.ServiceType;
+
+import finalproject.Ger_garage.DeafultData.DefaultUsers;
 import finalproject.Ger_garage.Models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,10 @@ public class BookingUserController {
     private UserRepository userRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
-//    @Autowired
+    //    @Autowired
 //    private CalendarData calendarData;
+//@Autowired
+//    private DefaultUsers defaultUsers;
     @Autowired
     private Time time;
 
@@ -49,7 +51,7 @@ public class BookingUserController {
         User user = userRepository.findByEmail(principal.getName());
         model.addAttribute("userBookings", bookingRepository.findByUserId(user.getId()));
 
-                return "user/user-bookings";
+        return "user/user-bookings";
     }
 
     /**
@@ -65,7 +67,24 @@ public class BookingUserController {
         model.addAttribute("booking", new Booking());
         model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
         model.addAttribute("availableTime", time.getAvailableTime());
+
+        // Retrive all dates from booking table and crate a list of dates
+//        List<Booking> bookings = new ArrayList<>();
+//        bookingRepository.findAll().forEach(bookings::add);
+//
+//
+//        List <LocalDate>dates = new ArrayList<>();
+//
+//         for (Booking booking :bookings) {
+//            dates.add(booking.getBookingDate().getDate());
+//
+//         }
+
+        //pass the list of dates to the view
+//        model.addAttribute("dates",dates);
         return "user/booking-form";
+
+
     }
 
     /**
@@ -79,21 +98,17 @@ public class BookingUserController {
     public String newBooking(@ModelAttribute("booking") @Valid Booking booking, Errors errors, Model model, Principal principal) {
 
 
-
         User user = userRepository.findByEmail(principal.getName());
 
-
-        LocalDate userDate =  booking.getBookingDate().getDate();
+        LocalDate userDate = booking.getBookingDate().getDate();
         LocalTime userTime = booking.getBookingDate().getTime();
 
-        Booking exestingDate = bookingRepository.findTopByBookingDateDate(userDate);
-
-        Booking exestingDateTime= bookingRepository.findTopByBookingDateTime(userTime);
+        Booking existingBooking = bookingRepository.findByDateAndTime(userDate, userTime);
 
 
-        if(exestingDateTime !=null &&  exestingDate !=null) {
+        if (existingBooking != null) {
             errors.pushNestedPath("bookingDate");
-            errors.rejectValue("time",null, "That time has already been booked");
+            errors.rejectValue("time", null, "That time has already been booked");
             errors.popNestedPath();
             model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
             model.addAttribute("availableTime", time.getAvailableTime());
@@ -110,14 +125,21 @@ public class BookingUserController {
                 null, null, null, null, null, null, null));
         booking.setStatus(BookingStatus.BOOKED);
         booking.setPrice(booking.getType().getPrice());
- //       booking.setVehicle(new Vehicle(booking.getVehicleId(), null, null, null, null, null, null, null, null, null));
+        //       booking.setVehicle(new Vehicle(booking.getVehicleId(), null, null, null, null, null, null, null, null, null));
         bookingRepository.save(booking);
 
         return "redirect:bookings?success";
     }
 
 
+    @GetMapping("receipt/{id}")
+    public String displayReceipt(@PathVariable Integer id, Model model) {
 
+        bookingRepository.findById(id).ifPresent(o -> model.addAttribute("booking", o));
+
+//        model.addAttribute("user",user);
+        return "user/receipt";
+    }
 
 
 //	@PostMapping("/add/{userId}")

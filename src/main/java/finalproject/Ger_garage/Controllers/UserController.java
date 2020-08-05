@@ -93,7 +93,7 @@ public class UserController {
 	public String updateUser(  @ModelAttribute @Valid User user, Errors errors, Principal principal, Model model) {
 		
 		 User newUser = userRepository.findByEmail(principal.getName());
-		 
+
 		 // If the input is wrong it will sent a user object to display a template
 		if(errors.hasErrors()) {
 			model.addAttribute("userId", user);
@@ -101,9 +101,11 @@ public class UserController {
 		}
 		user.setId(newUser.getId());
 		userRepository.save(user);
-		
-		return "redirect:?success";
+		return "redirect:../details?success";
 	}
+
+
+
 	
 	
 

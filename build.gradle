@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    
+    //thymeleaf template engine
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	// to connect to database
@@ -31,7 +31,18 @@ dependencies {
 	
 	//Thymeleaf security requered for rendering authentificated user on html page
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	
+
+	// webjar for bootstrap
+	implementation 'org.webjars:bootstrap:4.5.0'
+	// uploads tempusdominus a JavaScript library for creating datetime pickers.
+	implementation 'org.webjars:webjars-locator:0.40'
+
+	//styling icons
+	implementation 'org.webjars:font-awesome:5.13.1'
+	//date-tim picker
+	implementation 'org.webjars:bootstrap-datetimepicker:6aa746736d'
+
+
 	 developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	  
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

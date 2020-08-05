@@ -3,7 +3,7 @@ package finalproject.Ger_garage.Enums;
 public enum BookingStatus {
 	BOOKED("Booked"),
 	IN_SERVICE("In Service"),
-	COMPLITED("Complited"),
+	COMPLETED("Completed"),
 	COLLECTED("Collected"),
 	UNREPAIRABLE("Unrepairable");
 	

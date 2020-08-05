@@ -1,68 +1,87 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="utf-8">
-<link th:href="@{/bootstrup.css}" rel="stylesheet">
-<title>Add Vehicle</title>
+    <meta charset="utf-8">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
+    <title>Add Vehicle</title>
 </head>
 <body>
-  <nav th:replace= "fragments :: navigation" ></nav>
-  
-      <form action="#" th:action="@{/user/vehicle}" th:object="${vehicle}" method="post">
-   
-        <label >Type</label>
-      <select th:field="${vehicle.type}">
-  <option th:each="type : ${T(finalproject.Ger_garage.Enums.typeVehicle).values()}" 
-          th:value="${type}" 
-          th:text="${type.displayType}">
-          </option>
-</select>
-   
-   
-    <label for="licence">Licence Plate</label>
-    <input type="text" th:field="*{licence}"placeholder="licence plate">
-    <p th:if="${#fields.hasErrors('licence')}" th:errors="*{licence}"></p>
+<nav th:replace="fragments :: navigation"></nav>
 
-    
-      <label >Type</label>
-      <select th:field="${vehicle.engine}">
-  <option th:each="engine : ${T(finalproject.Ger_garage.Enums.Engine).values()}" 
-          th:value="${engine}" 
-          th:text="${engine.displayEngine}">
-          </option>
-</select>
-    
-         <label >Make</label>
-         
-      <select th:field="${vehicle.make}">
-  <option th:each="make : ${T(finalproject.Ger_garage.Enums.CarMake).values()}" 
-          th:value="${make}" 
-          th:text="${make.displayMake}">
-          </option>
-</select>
 
-     <label for="model">Model</label>
-    <input type="text" th:field="*{model}" placeholder="model">
-    <p th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></p>
- 
-     <label for="mileage">Mileage</label>
-    <input type="number" th:field="*{mileage}" placeholder="kilometers">
-    <p th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"></p>
- 
-     <label for="age">Age</label>
-    <input type="number" th:field="*{age}" placeholder="age">
-    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
-     
-     
-            <label for="other_details">Details</label>
-    <input type="text" th:field="*{other_details}" placeholder="details">
-    <p th:if="${#fields.hasErrors('other_details')}" th:errors="*{other_details}"></p>
-     
-     
-    <input type="submit" value="New Vehicle">   
-</form>
-  
-  
+<section class="py-5">
+
+    <div class="col-md-6 offset-md-3">
+        <div class="card-header">
+            <h3 class="mb-0">Register A New Vehicle</h3>
+        </div>
+        <div class="card-body">
+            <form class="form" action="#" th:action="@{/user/vehicle}"
+                  th:object="${vehicle}"
+                  method="post">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" th:field="${vehicle.type}">
+                        <option th:each="type : ${T(finalproject.Ger_garage.Enums.typeVehicle).values()}"
+                                th:value="${type}"
+                                th:text="${type.displayType}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Licence Plate</label>
+                    <input type="text" class="form-control" th:field="*{licence}" placeholder="licence plate">
+                    <p class="error" th:if="${#fields.hasErrors('licence')}" th:errors="*{licence}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" th:field="${vehicle.engine}">
+                        <option th:each="engine : ${T(finalproject.Ger_garage.Enums.Engine).values()}"
+                                th:value="${engine}"
+                                th:text="${engine.displayEngine}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Make</label>
+                    <select class="form-control" th:field="${vehicle.make}">
+                        <option th:each="make : ${T(finalproject.Ger_garage.Enums.CarMake).values()}"
+                                th:value="${make}"
+                                th:text="${make.displayMake}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Model</label>
+                    <input class="form-control" type="text" th:field="*{model}" placeholder="model">
+                    <p class="error" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Mileage</label>
+                    <input class="form-control" type="number" th:field="*{mileage}" placeholder="kilometers">
+                    <p class="error" th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Age</label>
+                    <input class="form-control" type="number" th:field="*{age}" placeholder="age">
+                    <p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Details</label>
+                    <input class="form-control" type="text" th:field="*{other_details}" placeholder="details">
+                    <p class="error" th:if="${#fields.hasErrors('other_details')}" th:errors="*{other_details}"></p>
+                </div>
+
+                <input type="submit" value="Add Vehicle">
+            </form>
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

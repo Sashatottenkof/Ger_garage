@@ -11,5 +11,6 @@ import finalproject.Ger_garage.Models.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	User findByEmail(String email);
+	User findByUsername(String username);
 //	Optional<User>findByEmailOption(String email);
 }

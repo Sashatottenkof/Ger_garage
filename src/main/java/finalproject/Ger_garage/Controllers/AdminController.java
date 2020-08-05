@@ -1,10 +1,12 @@
 package finalproject.Ger_garage.Controllers;
 
+import finalproject.Ger_garage.DTO.ParameterDate;
 import finalproject.Ger_garage.Models.*;
 import finalproject.Ger_garage.Repositories.BookingRepository;
 import finalproject.Ger_garage.Repositories.ItemRepository;
 import finalproject.Ger_garage.Repositories.MechanicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import finalproject.Ger_garage.Repositories.UserRepository;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -29,6 +32,9 @@ public class AdminController {
 	private MechanicRepository mechanicRepository;
 	@Autowired
 	private ItemRepository itemRepository;
+
+	@Autowired
+	private ParameterDate parameterDate;
 	/**
 	 * Display all registered users
 	 * @param model
@@ -61,10 +67,91 @@ public class AdminController {
 	@GetMapping("bookings")
 	public String  allBookings(Model model) {
 		model.addAttribute("bookings", bookingRepository.findAll());
-
+		model.addAttribute("chosenDate", parameterDate);
+		return "admin/bookings";
+	}
+	/**
+	 * Diasplays bookings for current month
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("thismonth-bookings")
+	public String  monthBookings(Model model) {
+		model.addAttribute("bookings", bookingRepository.thisMonthBookings());
+		model.addAttribute("chosenDate", parameterDate);
 		return "admin/bookings";
 	}
 
+	/**
+	 * Diasplays bookings for current week
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("thisweek-bookings")
+	public String  weekBookings(Model model) {
+		model.addAttribute("bookings", bookingRepository.thisWeekBookings());
+		model.addAttribute("chosenDate", parameterDate);
+		return "admin/bookings";
+	}
+
+	/**
+	 * Diasplays bookings for today
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("today-bookings")
+	public String  todayBookings(Model model) {
+		model.addAttribute("bookings", bookingRepository.todayBookings());
+		model.addAttribute("chosenDate", parameterDate);
+		return "admin/bookings";
+	}
+//	/**
+//	 * Diasplays bookings for specific day
+//	 * @param model
+//	 * @return
+//	 */
+//	@PostMapping ("daypicker-bookings")
+//	public String  dayPickerBookings(Model model, @RequestParam ("date")String dateString, Errors errors) {
+//
+//		if ( errors.hasErrors()) {
+//			return "admin/bookings";
+//		}
+//
+////		if (dateString == null) {
+////			return "admin/bookings";
+////		}
+//		//Since Spring can send only string, we have to convert it into LocaleDate
+//		LocalDate date = LocalDate.parse(dateString);
+//
+//
+//
+//		model.addAttribute("bookings", bookingRepository.dayPickerBookings(date));
+////		model.addAttribute("chosenDate", date);
+//
+//		return "admin/bookings";
+//	}
+
+
+	/**
+	 * Diasplays bookings for specific day
+	 * @param model
+	 * @return
+	 */
+	@PostMapping ("daypicker-bookings")
+	public String  dayPickerBookings(@ModelAttribute("chosenDate") @Valid ParameterDate parameterDate, Errors errors, Model model) {
+
+		if ( errors.hasErrors()) {
+			errors.rejectValue("date",null, "You have to choose a day");
+			return "admin/bookings";
+		}
+
+		LocalDate date = parameterDate.getDate();
+
+		model.addAttribute("chosenDate", parameterDate);
+		model.addAttribute("bookings", bookingRepository.dayPickerBookings(date));
+
+		return "admin/bookings";
+	}
 	/**
 	 * Display specific booking
 	 * View can not render Optional format, we have to pars only Object
@@ -131,6 +218,15 @@ public class AdminController {
 		booking.setPrice( booking.getPrice() - item.getPrice());
 		bookingRepository.save(booking);
 		return "redirect:../../booking-details/{id}?deleted";
+	}
+
+
+
+	@GetMapping("calendar")
+	public String  calendar(Model model) {
+//		model.addAttribute("bookings", bookingRepository.findAll());
+
+		return "admin/calendar";
 	}
 
 //	/**

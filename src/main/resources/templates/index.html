@@ -3,12 +3,14 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8">
-<link th:href="@{/bootstrup.css}" rel="stylesheet">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+	<link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
 <title>index</title>
 </head>
 <body>
 
-	<nav th:replace="fragments :: navigation"></nav>
+	<header th:replace="fragments :: navigation"></header>
 
 	<p>Index</p>
 
@@ -18,8 +20,8 @@
 		shown to administrators.</div>
 	<div sec:authorize="hasRole('ROLE_USER')">This content is only
 		shown to users.</div>
-		
 
+	<footer th:replace="fragments :: footer" ></footer>
 </body>
 
 

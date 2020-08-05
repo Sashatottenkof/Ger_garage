@@ -1,6 +1,7 @@
 package finalproject.Ger_garage.Models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,8 +51,12 @@ public class Booking {
     private Mechanic mechanic;
 
 //    @Temporal(TemporalType.DATE)
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-
+//@Column(nullable = false)
+////    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//@DateTimeFormat( pattern="yyyy-MM-dd [HH:mm]")
+//private LocalDateTime dateTime;
+//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//    private LocalDate dateTime;
     @Embedded
     @Valid
     //@NotNull(message = "Choose your day of service")
@@ -79,7 +84,7 @@ public class Booking {
         // TODO Auto-generated constructor stub
     }
 
-    public Booking(Integer id, ServiceType type, BookingStatus status, User user, Vehicle vehicle, Mechanic mechanic, @Valid BookingDate bookingDate, String comment, Collection<Item> items, double price) {
+    public Booking(Integer id, ServiceType type, BookingStatus status, User user, Vehicle vehicle, Mechanic mechanic, BookingDate bookingDate, String comment, Collection<Item> items, double price) {
         this.id = id;
         this.type = type;
         this.status = status;
@@ -175,17 +180,5 @@ public class Booking {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id=" + id +
-                ", type=" + type +
-                ", status=" + status +
-                ", user=" + user +
-                ", vehicle=" + vehicle +
-                ", mechanic=" + mechanic +
-                ", bookingDate=" + bookingDate +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
+
 }

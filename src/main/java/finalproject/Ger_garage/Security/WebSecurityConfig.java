@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Autowired
@@ -32,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
     	return NoOpPasswordEncoder.getInstance();
- //       return new BCryptPasswordEncoder();
+//        return new BCryptPasswordEncoder();
     }
  
     @Autowired
@@ -50,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .and()
             .authorizeRequests()
             //we have to give an access to the styles resources for all visitors 
-            .antMatchers("/resources/**", "/webjars/**","/assets/**", "/*.css","/*.jpg").permitAll()
+            .antMatchers("/resources/**", "/webjars/**","/assets/**", "/*.css","/*.jpg","/*.js","/images/**").permitAll()
              .antMatchers("/signup/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")

@@ -3,18 +3,38 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/bootstrup.css}" rel="stylesheet">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
     <title>All bookings</title>
 </head>
 <body>
+
+
+<header th:replace="fragments :: navigation"></header>
+
 <h1>All Bookings</h1>
+<a th:href="@{/admin/thismonth-bookings}">Month</a>
+<a th:href="@{/admin/thisweek-bookings}">Week</a>
+<a th:href="@{/admin/today-bookings}">Today</a>
+
+<form class="form" action="#" th:action="@{/admin/daypicker-bookings}" th:object="${chosenDate}"
+      method="post">
+    <label>Pick up a day: </label>
+
+    <input type="date" class="form-control" th:field="${chosenDate.date}" placeholder="dd-mm-yyyy">
+<!--    <p class="error" th:if="${#fields.hasErrors('chosenDate.date')}" th:errors="${chosenDate.date}"></p>-->
+    <input type="submit" value="Search">
+</form>
+<div th:if="${chosenDate.date != null}">
+    <p>Bookings on:</p>
+    <p th:text="${chosenDate.date}"></p>
+</div>
+
+<header>
 
 
-<nav th:replace= "fragments :: navigation" ></nav>
-<div>
-
-
-    <table>
+    <table class="table">
         <thead>
         <tr>
             <th>ID</th>
@@ -41,24 +61,29 @@
             <td th:text="${booking.bookingDate.time}"></td>
             <td th:text="${booking.comment}"></td>
             <td th:text="${booking.status}"></td>
-            <td th:text="${booking.mechanic.firstName + ' ' + booking.mechanic.lastName}" th:unless="${booking.mechanic == null}"></td>
+
+            <div th:unless="${booking.mechanic == null}">
+                <td th:text="${booking.mechanic.firstName + ' ' + booking.mechanic.lastName}"></td>
+            </div>
+            <div th:unless="${booking.mechanic != null}">
+                <td> Not set up</td>
+            </div>
+
             <td th:text="${booking.price}"></td>
-           <td><a th:href="@{/admin/booking-details/{id}(id=${booking.id})}">View Details</a></td>
+            <td><a th:href="@{/admin/booking-details/{id}(id=${booking.id})}">View Details</a></td>
         </tr>
 
 
         </tbody>
 
     </table>
-</div>
+</header>
 
 
-
-
-<div >
-
-
+<div>
 
 </div>
+
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

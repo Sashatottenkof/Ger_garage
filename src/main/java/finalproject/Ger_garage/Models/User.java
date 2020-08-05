@@ -1,5 +1,6 @@
 package finalproject.Ger_garage.Models;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -56,10 +57,10 @@ public class User {
 	@Size( max = 50, message= "Your phon number can't be that long")
     private String phone_number;
     
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Birthday is mandatory")
-    private Date date_of_birth;
+    private LocalDate date_of_birth;
 
     @CreationTimestamp
     private Date create_time;
@@ -84,7 +85,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(Integer id, String username, String email, String password, String first_name, String last_name, String phone_number, Date date_of_birth, Date create_time, Date update_time) {
+	public User(Integer id, String username, String email, String password, String first_name, String last_name, String phone_number, LocalDate date_of_birth, Date create_time, Date update_time) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -106,7 +107,7 @@ public class User {
 			@NotBlank(message = "Password is mandatory") String password,
 			@NotBlank(message = "First name is mandatory") String first_name, String last_name, @NotNull Gender gender,
 			@Size(max = 50, message = "Your phon number can't be that long") String phone_number,
-			@NotNull(message = "Birthday is mandatory") Date date_of_birth, Date create_time, Date update_time,
+			@NotNull(message = "Birthday is mandatory") LocalDate date_of_birth, Date create_time, Date update_time,
 			Collection<Role> roles) {
 		super();
 		this.id = id;
@@ -171,10 +172,10 @@ public class User {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-	public Date getDate_of_birth() {
+	public LocalDate getDate_of_birth() {
 		return date_of_birth;
 	}
-	public void setDate_of_birth(Date date_of_birth) {
+	public void setDate_of_birth(LocalDate date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
 	public Date getCreate_time() {

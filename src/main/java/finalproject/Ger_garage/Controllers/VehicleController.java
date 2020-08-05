@@ -41,6 +41,7 @@ public class VehicleController {
 		User user = userRepository.findByEmail(principal.getName());
 
 		// Then we send a vehicles with that user Id to the view
+
 		model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
 		return "user/user-vehicles";
 	}

@@ -1,16 +1,12 @@
 package finalproject.Ger_garage.Models;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.Errors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+
 
 
 @Embeddable
@@ -27,7 +23,8 @@ public class BookingDate {
     private LocalDate date;
 
     @Column(nullable = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     @NotNull(message = "Please choose a time")
  private LocalTime  time;
 
@@ -60,36 +57,5 @@ public class BookingDate {
     public void setTime(LocalTime time) {
         this.time = time;
     }
-//    public Optional<ValidationError> validate(LocalDate now) {
-//        if (bookingDate == null) {
-//            return Optional.of(new ValidationError("checkInDate.missing", "Missing check in date"));
-//        } else if (bookingDate == null) {
-//            return Optional.of(new ValidationError("checkOutDate.missing", "Missing check out date"));
-//        } else if (bookingDate.isBefore(now)) {
-//            return Optional.of(new ValidationError("checkInDate.future", "Check in date must be in the future"));
-//        } else if (bookingDate.getDayOfWeek() == DayOfWeek.SUNDAY); {
-//            return Optional.of(new ValidationError("checkOutDate.afterCheckIn", "Check out date must occur after check in date"));
-//        } else if (totalNights() < 1) {
-//            // handles case where check in/out dates are the same.
-//            return Optional.of(new ValidationError("checkOutDate.minNights", "Reservation must be for at least 1 night"));
-//        }
-//        return Optional.empty();
-//    }
-//    public static class ValidationError {
-//        private String code;
-//        private String reason;
-//
-//        public ValidationError(String code, String reason) {
-//            this.code = code;
-//            this.reason = reason;
-//        }
-//
-//        public String getCode() {
-//            return code;
-//        }
-//
-//        public String getReason() {
-//            return reason;
-//        }
-//    }
+
 }

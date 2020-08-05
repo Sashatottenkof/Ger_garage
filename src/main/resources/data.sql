@@ -10,12 +10,12 @@ delete from  mechanics;
 
 
 --deafault roles
-INSERT INTO role (id, name) VALUES 
+INSERT INTO role (id, name) VALUES
 (1, 'ROLE_ADMIN'),
 (2, 'ROLE_USER');
 
 --default users
-INSERT INTO user_details (id, email, password, username, first_name, last_name, gender, date_of_birth) VALUES 
+INSERT INTO user_details (id, email, password, username, first_name, last_name, gender, date_of_birth) VALUES
 (1, 'admin@gmail.com', '1111', 'Admin', 'Ger', 'Harrison', 'MALE', '1990-01-09'),
 (2, 'user@gmail.com', '2222', 'User','Ger', 'Harrison', 'MALE', '1990-01-09');
 
@@ -24,9 +24,9 @@ insert into users_roles(user_id, role_id) values
 (2,2);
 
 --test vehicles
-INSERT INTO vehicle (vehicle_id, type, engine, licence, make, mileage, age, model, USER_ID, other_details) VALUES 
-(1, 'SEDAN', 'DIESEL','123123', 'MERCEDES', '100', '2', 'xxy','1', 'test'),
-(2, 'SEDAN', 'ELECTRIC','134431f', 'MERCEDES', '200', '2', 'tt1','2','test');
+INSERT INTO vehicle (vehicle_id, type, engine, licence, make, mileage, age, model, USER_ID, other_details) VALUES
+(1, 'SEDAN', 'DIESEL','123123', 'FORD', '100', '2', 'Focus','1', 'test'),
+(2, 'SEDAN', 'ELECTRIC','134431f', 'SUBARU', '200', '2', 'XV','2','test');
 
 --default mechanics
 INSERT INTO mechanics (id, first_name, last_name)VALUES
