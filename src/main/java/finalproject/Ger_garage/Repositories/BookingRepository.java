@@ -47,4 +47,10 @@ public interface BookingRepository extends CrudRepository<Booking, Integer>{
 	//bookings on a specific day
 	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:pickedDay)", nativeQuery = true)
 	public Iterable<Booking> dayPickerBookings(@Param("pickedDay") LocalDate date);
+
+	//bookings of specific mechanic on specific day
+	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:pickedDay) AND MECHANIC_ID = :mechanic", nativeQuery = true)
+	public List<Booking> meckanicBookings(@Param("pickedDay") LocalDate date,@Param("mechanic")  Integer Id);
+
+//	public Booking findByVehicle_id();
 }

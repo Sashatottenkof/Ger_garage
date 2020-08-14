@@ -16,6 +16,7 @@ import finalproject.Ger_garage.Repositories.UserRepository;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -105,31 +106,6 @@ public class AdminController {
 		model.addAttribute("chosenDate", parameterDate);
 		return "admin/bookings";
 	}
-//	/**
-//	 * Diasplays bookings for specific day
-//	 * @param model
-//	 * @return
-//	 */
-//	@PostMapping ("daypicker-bookings")
-//	public String  dayPickerBookings(Model model, @RequestParam ("date")String dateString, Errors errors) {
-//
-//		if ( errors.hasErrors()) {
-//			return "admin/bookings";
-//		}
-//
-////		if (dateString == null) {
-////			return "admin/bookings";
-////		}
-//		//Since Spring can send only string, we have to convert it into LocaleDate
-//		LocalDate date = LocalDate.parse(dateString);
-//
-//
-//
-//		model.addAttribute("bookings", bookingRepository.dayPickerBookings(date));
-////		model.addAttribute("chosenDate", date);
-//
-//		return "admin/bookings";
-//	}
 
 
 	/**
@@ -183,6 +159,26 @@ public class AdminController {
 		Booking newBooking = booking;
 		newBooking.setItems(oldBooking.getItems());
 
+
+		// Validate that one machanic has no more then 4 bookings per day
+		List<Booking> mechanicsBookings = bookingRepository.meckanicBookings(newBooking.getDate(), newBooking.getMechanic().getId());
+		if(mechanicsBookings.size()>=4) {
+			//we have to make sure that when an admin wants to make changes other than assigning mechanic,it won't cause the error
+			if (oldBooking.getMechanic() != null) {
+				//if the booking already has the same mechanic it will save the changes without any problem
+				if(oldBooking.getMechanic().getId().equals(newBooking.getMechanic().getId())) {
+					bookingRepository.save(newBooking);
+					return "redirect:bookings?updated";
+				}
+			}
+			errors.rejectValue("mechanic.id", null, "One mechanic can't do more than 4 services per day");
+		}
+		if(errors.hasErrors()) {
+			model.addAttribute("mechanics", mechanicRepository.findAll());
+			model.addAttribute("items", itemRepository.findAll());
+			return "admin/booking-details";
+		}
+
 		bookingRepository.save(newBooking);
 		return "redirect:bookings?updated";
 	}
@@ -229,19 +225,4 @@ public class AdminController {
 		return "admin/calendar";
 	}
 
-//	/**
-//	 * adding items to the booking with model
-//	 * @param id
-//	 * @param item
-//	 * @return
-//	 */
-//	@PostMapping("additem/{id}")
-//	public String addItems( @ModelAttribute ("item") @Valid Item item, Errors errors, @PathVariable Integer id) {
-//		Booking booking = bookingRepository.findById(id).get();
-//
-//		booking.getItems().add(item);
-//		booking.setPrice( booking.getPrice() + item.getPrice());
-//		bookingRepository.save(booking);
-//		return "redirect:../booking-details/{id}";
-//	}
 }

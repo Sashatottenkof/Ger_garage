@@ -14,8 +14,11 @@
 <header th:replace="fragments :: navigation"></header>
 
 <div>
+<!--    <div>-->
+<!--        <p sec:authentication="principal.username"></p>-->
+<!--    </div>-->
 
-    <h1>User</h1>
+    <h1 th:text="${'User: ' + userId.username}"></h1>
     <h2>User Details</h2>
     <table class="table">
         <thead>
@@ -51,7 +54,7 @@
             </div>
 
             <td th:text="${userId.date_of_birth}"></td>
-            <td><a type="button" th:href="@{/user/update}">Change the Details</a></td>
+            <td><a  class="btn btn-dark" role="button" type="button" th:href="@{/user/update}">Change the Details</a></td>
             <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
         </tr>
         </tbody>
@@ -60,11 +63,7 @@
 </div>
 <!-- <a th:href="@{/user/update/{id}(id=${userId.id})}">Change the details</a>-->
 
-<div>
-    <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
 
-
-</div>
 
 <footer th:replace="fragments :: footer"></footer>
 </body>

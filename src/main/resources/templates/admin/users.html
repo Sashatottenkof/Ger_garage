@@ -1,71 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
     <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
-<title>Users list</title>
+    <title>Users list</title>
 </head>
 <body>
 <div>
 
-  <header th:replace= "fragments :: navigation" ></header>
+    <header th:replace="fragments :: navigation"></header>
     <h2>List of Users</h2>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>First Name</th>
-        <th >Last Name</th>
-        <th >Gender</th>
-        <th >Phone</th>
-        <th >Birthday</th>
-        <th >Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="user : ${allUsers}">
-       <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.password}"></td>
-        <td th:text="${user.first_name}"></td>
-	    <td th:text="${user.last_name}"></td>
-	    <td th:text="${user.gender}"></td>
-	    <td th:text="${user.phone_number}"></td>
-	    <td th:text="${user.date_of_birth}"></td>
-	  <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-	    <td>
-	    <form th:action="@{/admin/users}"  method ="post">
-	    <input type="hidden" name= "id" th:value= "${user.id}">
-	    <input type="submit" value = "Delete">
-	     </form>
-	    </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <span th:text ="${#authentication.getPrincipal().getUsername()}"></span>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Birthday</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.first_name}"></td>
+            <td th:text="${user.last_name}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.phone_number}"></td>
+            <td th:text="${user.date_of_birth}"></td>
+            <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
+            <td>
+                <form th:action="@{/admin/users}" method="post">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <input class="btn btn-dark" type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
- <div >
-         <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
-        
-        
-         
-     </div>
-     
-     body>
-    <div sec:authorize="isAuthenticated()">
-      Authenticated as <span sec:authentication="name"></span></div>
+    <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+
 </div>
-
-<footer th:replace="fragments :: footer" ></footer>
+    <footer th:replace="fragments :: footer"></footer>
 </body>
 
 </html>

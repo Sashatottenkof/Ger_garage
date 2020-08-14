@@ -37,7 +37,7 @@
                     <p class="error" th:if="${#fields.hasErrors('licence')}" th:errors="*{licence}"></p>
                 </div>
                 <div class="form-group">
-                    <label>Type</label>
+                    <label>Engine Type</label>
                     <select class="form-control" th:field="${vehicle.engine}">
                         <option th:each="engine : ${T(finalproject.Ger_garage.Enums.Engine).values()}"
                                 th:value="${engine}"
@@ -77,7 +77,7 @@
                     <p class="error" th:if="${#fields.hasErrors('other_details')}" th:errors="*{other_details}"></p>
                 </div>
 
-                <input type="submit" value="Add Vehicle">
+                <input   class="btn btn-dark"  type="submit" value="Add Vehicle">
             </form>
         </div>
     </div>

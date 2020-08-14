@@ -12,42 +12,44 @@
 <header th:replace="fragments :: navigation"></header>
 <body>
 
+<div class="text-center">
+    <div class="h4">
+        <div>
+            <p th:text="${'Customer: ' + booking.user.first_name + ' ' + booking.user.last_name}"></p>
+        </div>
 
-<div>
-    <p th:text="${booking.user.first_name + ' ' + booking.user.last_name}"></p>
-</div>
+        <div>
+            <p th:text="${'Id of Service:  ' + booking.id}"></p>
+        </div>
+        <div>
+            <p th:text="${ 'Type of Service:  ' + booking.type}"></p>
+        </div>
+        <div>
+            <p th:text="${ 'Car Model:  ' + booking.vehicle.model}"></p>
+        </div>
+        <div>
+            <p th:text="${ 'Car Licence:  ' + booking.vehicle.licence}"></p>
+        </div>
+        <div>
+            <p th:text="${ 'Mechanic: '  + booking.mechanic.firstName + ' ' + booking.mechanic.lastName}"></p>
+        </div>
+        <div>
+            <p th:text="${'Status: ' + booking.status}"></p>
+        </div>
+        <div>
+            <div>
+                <p>Additional items: </p>
+                <div th:each="item : ${booking.items}">
+                    <p th:text="${item.name + ' '+  item.price}"></p>
+                </div>
+            </div>
+        </div>
 
-<div>
-    <p th:text="${'Id of Service:  ' + booking.id}"></p>
-</div>
-<div>
-    <p th:text="${ 'Type of Service:  ' + booking.type}"></p>
-</div>
-<div>
-    <p th:text="${ 'Car Model:  ' + booking.vehicle.model}"></p>
-</div>
-<div>
-    <p th:text="${ 'Car Licence:  ' + booking.vehicle.licence}"></p>
-</div>
-<div>
-    <p th:text="${ 'Mechanic: '  + booking.mechanic.firstName + ' ' + booking.mechanic.lastName}"></p>
-</div>
-<div>
-    <p th:text="${'Status: ' + booking.status}"></p>
-</div>
-<div>
-    <div>
-        <p>Additional items: </p>
-        <div th:each="item : ${booking.items}">
-            <p th:text="${item.name + ' '+  item.price}"></p>
+        <div>
+            <p th:text="${ 'Total Price: ' + booking.price}"></p>
         </div>
     </div>
 </div>
-
-<div>
-    <p th:text="${ 'Total Price: ' + booking.price}"></p>
-</div>
-
-
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

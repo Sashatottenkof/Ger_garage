@@ -45,7 +45,7 @@
             <td>
                 <form th:action="@{/user/vehicle/delete}" method="post">
                     <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
-                    <input type="submit" value="Delete">
+                    <input  class="btn btn-dark"  type="submit" value="Delete">
                 </form>
             </td>
             <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
@@ -53,20 +53,17 @@
         </tbody>
 
     </table>
-
-    <a th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+    <div class="text-center">
+    <a  class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+    </div>
 </div>
 
 
 <div th:unless="${!userVehicles.empty}">
     <p> You don't have any registered vehicles</p>
-    <a th:href="@{/user/vehicle/}">Add a Vehicle</a>
+    <a  class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a Vehicle</a>
 </div>
-<div>
-    <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
 
-
-</div>
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

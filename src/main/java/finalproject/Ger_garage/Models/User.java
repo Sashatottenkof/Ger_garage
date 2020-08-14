@@ -45,16 +45,18 @@ public class User {
 
 	@Column(nullable = false)
 	@NotBlank (message = "First name is mandatory")
+	@Size(max = 50, message= "Your first name should can't be that long")
 	private String first_name;
 
 	@Column(nullable = false)
+	@Size(max = 50, message= "Your last name should can't be that long")
     private String last_name;
 
 	@Enumerated(EnumType.STRING)
 	@NotNull
     private Gender gender;
 	
-	@Size( max = 50, message= "Your phon number can't be that long")
+	@Size( max = 50, message= "Your phone number can't be that long")
     private String phone_number;
     
 	//@Temporal(TemporalType.DATE)

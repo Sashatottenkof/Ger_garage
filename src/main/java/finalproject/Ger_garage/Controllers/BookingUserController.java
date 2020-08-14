@@ -63,6 +63,8 @@ public class BookingUserController {
     @GetMapping("book")
     public String displayBookingForm(Model model, Principal principal) {
 
+
+
         User user = userRepository.findByEmail(principal.getName());
         model.addAttribute("booking", new Booking());
         model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
@@ -142,19 +144,4 @@ public class BookingUserController {
     }
 
 
-//	@PostMapping("/add/{userId}")
-//	public String addRequest(@PathVariable Integer userId, @RequestBody ServiceRequest request) {
-//		userRepository.findById(userId).map(user -> {
-//			request.setUser(user);
-//			return serviceRequestRepository.save(request);
-//
-//		});
-//		return "Saved";
-//	}
-//
-//	@GetMapping("/requests")
-//	public Iterable<ServiceRequest> getRequests() {
-//		Iterable<Vehicle> vehicles = vehicleRepository.findAll();		
-//		return serviceRequestRepository.findAll();
-//	}
 }

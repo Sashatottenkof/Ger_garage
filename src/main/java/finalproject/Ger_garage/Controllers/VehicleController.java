@@ -76,7 +76,8 @@ public class VehicleController {
 		if (errors.hasErrors()) {
 			return "user/vehicle-form";
 		}
-		vehicle.setUser(new User(user.getId(), null, null, null, null, null, null, null, null, null));
+		vehicle.setUser(new User(user.getId(), null, null, null, null,
+				null, null, null, null, null));
 		vehicleRepository.save(vehicle);
 		return "redirect:vehicles?success";
 	}
@@ -88,6 +89,7 @@ public class VehicleController {
 	 */
 	@PostMapping("vehicle/delete")
 	public String deleteVehicle(@RequestParam Integer id) {
+
 		vehicleRepository.deleteById(id);
 		
 		return "redirect:../vehicles?deleted";

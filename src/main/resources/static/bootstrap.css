@@ -106,3 +106,10 @@ padding: 100px
 .error {
   color: red;
 }
+
+.table-items {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}

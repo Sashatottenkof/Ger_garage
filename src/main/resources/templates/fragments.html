@@ -23,19 +23,13 @@
                         </a>
                     </li>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/calendar">Calendar</a>
-                        </li>
-                    </div>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/users">Users</a>
                         </li>
                     </div>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/bookings">All Bookings</a>
+                            <a class="nav-link" href="/admin/bookings">List of Bookings</a>
                         </li>
                     </div>
 
@@ -83,6 +77,9 @@
 <footer th:fragment="footer" id="footer" class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Contacts</p>
+        <i class="fab fa-facebook fa-lg"></i>
+        <i class="fab fa-github fa-lg"></i>
+        <i class="fab fa-instagram fa-lg"></i>
     </div>
     <!-- /.container -->
 </footer>

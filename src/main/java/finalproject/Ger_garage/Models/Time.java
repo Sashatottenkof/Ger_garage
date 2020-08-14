@@ -15,8 +15,9 @@ public class Time {
     public Time(Collection<LocalTime> availableTime) {
         this.availableTime = availableTime;
 
-        availableTime.add( LocalTime.of(9, 0));
-        availableTime.add( LocalTime.of(11, 0));
+        availableTime.add( LocalTime.of(8, 0));
+        availableTime.add( LocalTime.of(10, 0));
+        availableTime.add( LocalTime.of(12, 0));
         availableTime.add( LocalTime.of(14, 0));
         availableTime.add( LocalTime.of(16, 0));
     }

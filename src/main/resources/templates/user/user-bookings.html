@@ -47,7 +47,6 @@
             <div th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COLLECTED}">
                 <td><a th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
             </div>
-            <a th:href="@{/user/receipt/{id}(id=${booking.id})}">test</a>
         </tr>
 
         <!--        <td th:text="${vehicle.vehicle_id}"></td>-->
@@ -67,13 +66,13 @@
 </div>
 
 <div th:unless="${!userBookings.empty}">
-
-    <p> You don't have any bookings</p>
-    <a th:href="@{/user/book/}">Book a Service</a>
-
+    <div class="text-center">
+        <p> You don't have any bookings</p>
+        <a class="btn btn-dark" role="button" th:href="@{/user/book/}">Book a Service</a>
+    </div>
 </div>
 <div>
-    <p>Welcome Administrator(<span sec:authentication="principal.username"></span>)</p>
+
 
 </div>
 <footer th:replace="fragments :: footer"></footer>
