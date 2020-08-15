@@ -41,12 +41,7 @@ public class MyUserDetailsService implements UserDetailsService {
          getAuthorities(user));
         		 
     }
-    	
-//        User user = userRepository.findByEmailOption(userName)
-//        		.orElseThrow(() -> new UsernameNotFoundException("Email " + userName + " not found"));
-//         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-//         getAuthorities(user));
-//    }
+
 
     private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
         String[] userRoles = user.getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);

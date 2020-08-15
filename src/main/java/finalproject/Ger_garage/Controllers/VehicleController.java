@@ -55,7 +55,7 @@ public class VehicleController {
 	@GetMapping("vehicle")
 	public String displayVehicleForm(Model model) {
 		model.addAttribute(new Vehicle());
-		return "/user/vehicle-form";
+		return "user/vehicle-form";
 	}
 
 

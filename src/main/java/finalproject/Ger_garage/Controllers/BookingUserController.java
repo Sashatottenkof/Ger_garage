@@ -114,13 +114,13 @@ public class BookingUserController {
             errors.popNestedPath();
             model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
             model.addAttribute("availableTime", time.getAvailableTime());
-            return "/user/booking-form";
+            return "user/booking-form";
         }
 
         if (errors.hasErrors()) {
             model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
             model.addAttribute("availableTime", time.getAvailableTime());
-            return "/user/booking-form";
+            return "user/booking-form";
         }
 
         booking.setUser(new User(user.getId(), null, null, null, null,

@@ -36,7 +36,7 @@ public class SignupController {
 	public String displayAddUserForm(Model model) {
 		model.addAttribute(new User());
 //		model.addAttribute(Gender.values());
-	 return "/signup";
+	 return "signup";
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class SignupController {
 
 		// if any errors, we reload the "sign up" page
 		if(errors.hasErrors()) {
-			return "/signup";
+			return "signup";
 		}
 		// we have to give a role to the user, by default it is "ROLE_USER"
 		user.setRoles(Arrays.asList(new Role("ROLE_USER")));
@@ -71,6 +71,5 @@ public class SignupController {
 		userRepository.save(user);
 
 		return "redirect:login?success";
-//		return "redirect:signup?success";
 	}
 }
