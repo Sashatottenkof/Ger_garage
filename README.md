@@ -21,7 +21,7 @@ Web service allows customers to book their vehicles for a check-up or service.
 14) Owner can add additional item to the cost of service;
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
-##During the development following tools and technologies have been used:
+## During the development following tools and technologies have been used:
 
 • SpringBoot - a core of backend; 
 
@@ -46,4 +46,15 @@ Web service allows customers to book their vehicles for a check-up or service.
 • Docker - was used to run database during development and deploy whole web application on a Google Cloud Platform.
 
 • Google Engine - was used as a live-server to deploy the app;
+
+## To Start
+
+Set up a database in a Docker container 
+
+**$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql**
+
+**192.168.99.100:3306/Ger_garage**
+
+http://localhost:8080/
+
 
