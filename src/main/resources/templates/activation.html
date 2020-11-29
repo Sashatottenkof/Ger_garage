@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
+    <title>Activation</title>
+</head>
+<body>
+<header th:replace="fragments :: navigation"></header>
+<div class="card-body">
+    <p th:if="@{message}" th:text="${message}">Message</p>
+    <a th:href="@{/login}" class="btn btn-info">Login</a>
+</div>
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

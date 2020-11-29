@@ -1,3 +1,4 @@
+delete from  verification_token;
 delete from  items;
 delete from  item;
 delete from  booking_request;
@@ -6,8 +7,14 @@ delete from  users_roles;
 delete from  role;
 delete from  user_details;
 delete from  mechanics;
+delete from  persistent_logins;
 
-
+create table if not exists persistent_logins (
+     username varchar(100) not null,
+     series varchar(64) primary key,
+     token varchar(64) not null,
+     last_used timestamp not null
+);
 
 --deafault roles
 INSERT INTO role (id, name) VALUES
@@ -15,9 +22,9 @@ INSERT INTO role (id, name) VALUES
 (2, 'ROLE_USER');
 
 --default users
-INSERT INTO user_details (id, email, password, username, first_name, last_name, gender, date_of_birth) VALUES
-(1, 'admin@gmail.com', '1111', 'Admin', 'Ger', 'Harrison', 'MALE', '1990-01-09'),
-(2, 'user@gmail.com', '2222', 'User','Ger', 'Harrison', 'MALE', '1990-01-09');
+INSERT INTO user_details (id, email, password, username, first_name, last_name, gender, date_of_birth, enabled) VALUES
+(1, 'admin@gmail.com', '$2a$10$rXnjuySCmW6jqP77IrYXHusdMoJzUEnSeh6XOJ4ErbzBGPeSQrbXa', 'Admin', 'Ger', 'Harrison', 'MALE', '1990-01-09', true),
+(2, 'user@gmail.com', '$2a$10$nSpZ0ZPr/XM7KVDyDOw.4OB.kXWMELjQ9rc7pICqrtChBnVPHPog2', 'User','Ger', 'Harrison', 'MALE', '1990-01-09', true);
 
 insert into users_roles(user_id, role_id) values
 (1,1),

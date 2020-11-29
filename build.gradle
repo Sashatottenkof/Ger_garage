@@ -39,10 +39,14 @@ dependencies {
 
 	//styling icons
 	implementation 'org.webjars:font-awesome:5.13.1'
-	//date-tim picker
+
+	//date-time picker
 	implementation 'org.webjars:bootstrap-datetimepicker:6aa746736d'
 
+	// Email service
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	// to use autoloader to save time in developing
 	 developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	  
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

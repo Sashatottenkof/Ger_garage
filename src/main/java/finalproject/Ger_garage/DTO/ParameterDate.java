@@ -1,11 +1,12 @@
 package finalproject.Ger_garage.DTO;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 import java.time.LocalDate;
 
-@Service
+@Component
 public class ParameterDate {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

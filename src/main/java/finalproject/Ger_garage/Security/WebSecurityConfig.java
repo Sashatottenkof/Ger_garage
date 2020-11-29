@@ -2,10 +2,12 @@ package finalproject.Ger_garage.Security;
 
 import javax.sql.DataSource;
 
+import finalproject.Ger_garage.Controllers.SignupController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -24,34 +25,39 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
- 
+
     @Autowired
     private UserDetailsService customUserDetailsService;
- 
+
     @Autowired
     private DataSource dataSource;
- 
+
+    private Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return NoOpPasswordEncoder.getInstance();
-//        return new BCryptPasswordEncoder();
+          return new BCryptPasswordEncoder();
     }
- 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
         auth
          .userDetailsService(customUserDetailsService)
          .passwordEncoder(passwordEncoder());
+
     }
- 
+
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http         
+        http
          .headers()
           .frameOptions().sameOrigin()
           .and()
             .authorizeRequests()
-            //we have to give an access to the styles resources for all visitors 
+            //we have to give an access to the styles resources for all visitors
             .antMatchers("/resources/**", "/webjars/**","/assets/**", "/*.css","/*.jpg","/*.js","/images/**").permitAll()
              .antMatchers("/signup/**").permitAll()
                 .antMatchers("/").permitAll()
@@ -60,30 +66,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                  .loginPage("/login")
+                .loginPage("/login")
                 .defaultSuccessUrl("/")
-                  .failureUrl("/login?error")
+                .failureUrl("/login?error")
                 .permitAll()
                 .and()
             .logout()
-             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-             .logoutSuccessUrl("/login?logout")
-//             .deleteCookies("my-remember-me-cookie")
-                .permitAll()
-                .and()
-//             .rememberMe()
-//              //.key("my-secure-key")
-//              .rememberMeCookieName("my-remember-me-cookie")
-//              .tokenRepository(persistentTokenRepository())
-//              .tokenValiditySeconds(24 * 60 * 60)
-//              .and()
+                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                 .logoutSuccessUrl("/login?logout")
+                 .deleteCookies("my-remember-me-cookie")
+                 .permitAll()
+                 .and()
+             .rememberMe()
+                 .key("my-secure-key")
+                 .rememberMeCookieName("my-remember-me-cookie")
+                 .tokenRepository(persistentTokenRepository())
+                 .tokenValiditySeconds(24 * 60 * 60)
+                 .and()
             .exceptionHandling()
               ;
     }
-    
-//    PersistentTokenRepository persistentTokenRepository(){
-//     JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
-//     tokenRepositoryImpl.setDataSource(dataSource);
-//     return tokenRepositoryImpl;
-//    }
+
+    PersistentTokenRepository persistentTokenRepository(){
+     JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+
+     tokenRepositoryImpl.setDataSource(dataSource);
+        logger.info("Get user for token");
+     return tokenRepositoryImpl;
+    }
 }

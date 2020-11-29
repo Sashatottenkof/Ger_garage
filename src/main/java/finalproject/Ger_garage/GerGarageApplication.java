@@ -7,6 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+/**
+ *  A single @SpringBootApplication annotation can be used to enable those three features
+ * @Configuration @EnableAutoConfiguration @ComponentScan
+ * */
 //@EnableJpaRepositories(basePackages = {"finalproject.Models"})
 //@EntityScan(basePackages = {"finalproject.Models"})
 //@ComponentScan("finalproject*")

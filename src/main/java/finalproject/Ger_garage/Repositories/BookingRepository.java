@@ -5,17 +5,19 @@ import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 
+import finalproject.Ger_garage.Models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import finalproject.Ger_garage.Models.Booking;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public interface BookingRepository extends CrudRepository<Booking, Integer>{
 
 
-	public Collection<Booking> findByUserId(Integer userId);
+	public Collection<Booking> findByUser(User user);
 
 //	@Query("SELECT b FROM Booking b WHERE b.bookingDate.date > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY score DESC")
 //	@Query("SELECT b FROM Booking b WHERE b.bookingDate.date>'2020-08-04'")

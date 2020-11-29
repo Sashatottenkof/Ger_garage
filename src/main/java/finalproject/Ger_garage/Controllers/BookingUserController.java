@@ -49,7 +49,7 @@ public class BookingUserController {
     public String displayUserBookings(Model model, Principal principal) {
 
         User user = userRepository.findByEmail(principal.getName());
-        model.addAttribute("userBookings", bookingRepository.findByUserId(user.getId()));
+        model.addAttribute("userBookings", bookingRepository.findByUser(user));
 
         return "user/user-bookings";
     }
@@ -67,7 +67,7 @@ public class BookingUserController {
 
         User user = userRepository.findByEmail(principal.getName());
         model.addAttribute("booking", new Booking());
-        model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
+        model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
         model.addAttribute("availableTime", time.getAvailableTime());
 
         // Retrive all dates from booking table and crate a list of dates
@@ -112,22 +112,18 @@ public class BookingUserController {
             errors.pushNestedPath("bookingDate");
             errors.rejectValue("time", null, "That time has already been booked");
             errors.popNestedPath();
-            model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
-            model.addAttribute("availableTime", time.getAvailableTime());
-            return "user/booking-form";
         }
 
         if (errors.hasErrors()) {
-            model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
+            model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
             model.addAttribute("availableTime", time.getAvailableTime());
             return "user/booking-form";
         }
 
         booking.setUser(new User(user.getId(), null, null, null, null,
-                null, null, null, null, null, null, null));
+                null, null, null, null));
         booking.setStatus(BookingStatus.BOOKED);
         booking.setPrice(booking.getType().getPrice());
-        //       booking.setVehicle(new Vehicle(booking.getVehicleId(), null, null, null, null, null, null, null, null, null));
         bookingRepository.save(booking);
 
         return "redirect:bookings?success";
@@ -139,7 +135,6 @@ public class BookingUserController {
 
         bookingRepository.findById(id).ifPresent(o -> model.addAttribute("booking", o));
 
-//        model.addAttribute("user",user);
         return "user/receipt";
     }
 

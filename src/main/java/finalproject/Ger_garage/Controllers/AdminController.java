@@ -36,6 +36,8 @@ public class AdminController {
 
 	@Autowired
 	private ParameterDate parameterDate;
+
+
 	/**
 	 * Display all registered users
 	 * @param model

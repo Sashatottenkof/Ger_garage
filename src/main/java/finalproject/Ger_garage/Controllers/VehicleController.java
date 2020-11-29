@@ -42,7 +42,7 @@ public class VehicleController {
 
 		// Then we send a vehicles with that user Id to the view
 
-		model.addAttribute("userVehicles", vehicleRepository.findByUserId(user.getId()));
+		model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
 		return "user/user-vehicles";
 	}
 
@@ -77,7 +77,7 @@ public class VehicleController {
 			return "user/vehicle-form";
 		}
 		vehicle.setUser(new User(user.getId(), null, null, null, null,
-				null, null, null, null, null));
+				null, null, null, null));
 		vehicleRepository.save(vehicle);
 		return "redirect:vehicles?success";
 	}

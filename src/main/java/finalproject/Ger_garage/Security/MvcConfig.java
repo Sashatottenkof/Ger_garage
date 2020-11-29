@@ -10,25 +10,24 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-	/**
-	 * we have configured view controllers to specify which view to render for which URL. 
-	 */
-	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addViewController("/user/users").setViewName("users");
-		registry.addViewController("/signup").setViewName("signup");
-//		registry.addViewController("/user/update").setViewName("update");
-//		registry.addViewController("/user/details").setViewName("details");
-		registry.addViewController("/").setViewName("index");
-		registry.addViewController("/login").setViewName("login");
-	}
-	
-	/**
-	 * to enable using the Thymeleaf Spring Security dialect.
-	 * @return
-	 */
-	@Bean
+    /**
+     * we have configured view controllers to specify which view to render for which URL.
+     */
+    public void addViewControllers(ViewControllerRegistry registry) {
+
+        registry.addViewController("/signup").setViewName("signup");
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/login").setViewName("login");
+    }
+
+    /**
+     * to enable  the Thymeleaf Spring Security dialect.
+     *
+     * @return
+     */
+    @Bean
     public SpringSecurityDialect securityDialect() {
-         return new SpringSecurityDialect();
+        return new SpringSecurityDialect();
     }
 
 }

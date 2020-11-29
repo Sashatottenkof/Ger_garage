@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
     <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
-<title>Log In</title>
+    <title>Log In</title>
 </head>
 <body>
 <header th:replace="fragments :: navigation"></header>
 <div class="login-dark">
-<form  th:action="@{/login}" method="post">
-  <div class="form-group">
-   <div th:if="${param.error}">
-      <div class="alert alert-danger">Invalid email or
-       password.</div>
-     </div>
-     <div th:if="${param.logout}">
-      <div class="alert alert-info">You have been logged out.</div>
-     </div>
-    <label>Email</label>
-    <input  type="email" name="username" class="form-control" id="formGroupExampleInput" placeholder="Email">
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password"  class="form-control" id="formGroupExampleInput2" placeholder="Password">
-  </div>
-      <div class="form-group col-xs-offset-8 col-xs-4">
-        <button type="submit" class="btn btn-primary btn-block btn-flat">LogIn</button>
-       </div>
-    <div class="form-group">
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid email or
+                    password.
+                </div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-info">You have been logged out.</div>
+            </div>
+            <label>Email</label>
+            <input type="email" name="username" class="form-control" id="formGroupExampleInput" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" id="formGroupExampleInput2"
+                   placeholder="Password">
+        </div>
+        <input type="checkbox" name="remember-me"> Remember Me
+        <div class="form-group col-xs-offset-8 col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">LogIn</button>
+        </div>
+        <div class="form-group">
       <span>New user? <a href="/" th:href="@{/signup}">Register
         here</a></span>
-    </div>
-</form>
+        </div>
+    </form>
 
 </div>
-
-
 
 
 <!--<div class="login-dark">-->
@@ -51,6 +52,6 @@
 <!--</div>-->
 
 
-<footer th:replace="fragments :: footer" ></footer>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
