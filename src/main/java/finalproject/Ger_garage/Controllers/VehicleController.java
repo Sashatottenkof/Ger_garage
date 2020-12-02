@@ -4,6 +4,8 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import finalproject.Ger_garage.Service.UserService;
+import finalproject.Ger_garage.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,10 @@ import finalproject.Ger_garage.Repositories.VehicleRepository;
 @RequestMapping("user")
 public class VehicleController {
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Autowired
-	private VehicleRepository vehicleRepository;
+	private VehicleService vehicleService;
 
 	/**
 	 * Display all vehicle that user registered
@@ -38,11 +40,11 @@ public class VehicleController {
 	@GetMapping("vehicles")
 	public String displayUsersVehicles(Model model, Principal principal) {
 		// We have to find Vehicles that belong to the user who send a request
-		User user = userRepository.findByEmail(principal.getName());
+		User user = userService.findByEmail(principal.getName());
 
 		// Then we send a vehicles with that user Id to the view
 
-		model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
+		model.addAttribute("userVehicles", vehicleService.findByUser(user));
 		return "user/user-vehicles";
 	}
 
@@ -70,7 +72,7 @@ public class VehicleController {
 	@PostMapping("vehicle")
 	public String addVehicle(@ModelAttribute @Valid Vehicle vehicle, Errors errors, Principal principal) {
 
-		User user = userRepository.findByEmail(principal.getName());
+		User user = userService.findByEmail(principal.getName());
 
 		// if any errors, we reload the vehicle form page with displayed errors
 		if (errors.hasErrors()) {
@@ -78,7 +80,7 @@ public class VehicleController {
 		}
 		vehicle.setUser(new User(user.getId(), null, null, null, null,
 				null, null, null, null));
-		vehicleRepository.save(vehicle);
+		vehicleService.saveVehicle(vehicle);
 		return "redirect:vehicles?success";
 	}
 	
@@ -90,7 +92,7 @@ public class VehicleController {
 	@PostMapping("vehicle/delete")
 	public String deleteVehicle(@RequestParam Integer id) {
 
-		vehicleRepository.deleteById(id);
+		vehicleService.deleteVehicleById(id);
 		
 		return "redirect:../vehicles?deleted";
 	}

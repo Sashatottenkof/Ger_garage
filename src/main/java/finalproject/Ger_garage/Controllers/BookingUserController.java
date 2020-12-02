@@ -1,39 +1,35 @@
 package finalproject.Ger_garage.Controllers;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 import javax.validation.Valid;
 
 
-import finalproject.Ger_garage.DeafultData.DefaultUsers;
 import finalproject.Ger_garage.Models.*;
+import finalproject.Ger_garage.Service.BookingService;
+import finalproject.Ger_garage.Service.UserService;
+import finalproject.Ger_garage.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import finalproject.Ger_garage.Enums.BookingStatus;
-import finalproject.Ger_garage.Repositories.BookingRepository;
-import finalproject.Ger_garage.Repositories.UserRepository;
-import finalproject.Ger_garage.Repositories.VehicleRepository;
 
 // "principal" is a current logged in user
 
 @Controller
 @RequestMapping("user")
 public class BookingUserController {
+
     @Autowired
-    private BookingRepository bookingRepository;
+    private UserService userService;
     @Autowired
-    private UserRepository userRepository;
+    private VehicleService vehicleService;
     @Autowired
-    private VehicleRepository vehicleRepository;
-    //    @Autowired
-//    private CalendarData calendarData;
-//@Autowired
-//    private DefaultUsers defaultUsers;
+    private BookingService bookingService;
+
     @Autowired
     private Time time;
 
@@ -48,8 +44,8 @@ public class BookingUserController {
     @GetMapping("bookings")
     public String displayUserBookings(Model model, Principal principal) {
 
-        User user = userRepository.findByEmail(principal.getName());
-        model.addAttribute("userBookings", bookingRepository.findByUser(user));
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("userBookings", bookingService.findByUser(user));
 
         return "user/user-bookings";
     }
@@ -64,26 +60,11 @@ public class BookingUserController {
     public String displayBookingForm(Model model, Principal principal) {
 
 
-
-        User user = userRepository.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("booking", new Booking());
-        model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
+        model.addAttribute("userVehicles", vehicleService.findByUser(user));
         model.addAttribute("availableTime", time.getAvailableTime());
 
-        // Retrive all dates from booking table and crate a list of dates
-//        List<Booking> bookings = new ArrayList<>();
-//        bookingRepository.findAll().forEach(bookings::add);
-//
-//
-//        List <LocalDate>dates = new ArrayList<>();
-//
-//         for (Booking booking :bookings) {
-//            dates.add(booking.getBookingDate().getDate());
-//
-//         }
-
-        //pass the list of dates to the view
-//        model.addAttribute("dates",dates);
         return "user/booking-form";
 
 
@@ -100,12 +81,11 @@ public class BookingUserController {
     public String newBooking(@ModelAttribute("booking") @Valid Booking booking, Errors errors, Model model, Principal principal) {
 
 
-        User user = userRepository.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
 
-        LocalDate userDate = booking.getBookingDate().getDate();
-        LocalTime userTime = booking.getBookingDate().getTime();
 
-        Booking existingBooking = bookingRepository.findByDateAndTime(userDate, userTime);
+        // find if that time is available
+        Booking existingBooking = bookingService.findExistingBooking(booking);
 
 
         if (existingBooking != null) {
@@ -115,7 +95,7 @@ public class BookingUserController {
         }
 
         if (errors.hasErrors()) {
-            model.addAttribute("userVehicles", vehicleRepository.findByUser(user));
+            model.addAttribute("userVehicles", vehicleService.findByUser(user));
             model.addAttribute("availableTime", time.getAvailableTime());
             return "user/booking-form";
         }
@@ -124,16 +104,22 @@ public class BookingUserController {
                 null, null, null, null));
         booking.setStatus(BookingStatus.BOOKED);
         booking.setPrice(booking.getType().getPrice());
-        bookingRepository.save(booking);
+        bookingService.save(booking);
 
         return "redirect:bookings?success";
     }
 
-
+    /**
+     * Display page with receipt for specific booking
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("receipt/{id}")
     public String displayReceipt(@PathVariable Integer id, Model model) {
 
-        bookingRepository.findById(id).ifPresent(o -> model.addAttribute("booking", o));
+        model.addAttribute("booking", bookingService.findById(id));
 
         return "user/receipt";
     }

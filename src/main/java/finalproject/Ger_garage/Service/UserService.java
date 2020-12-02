@@ -31,6 +31,9 @@ public class UserService {
     // to get log in case of error
     private Logger logger = LoggerFactory.getLogger(SignupController.class);
 
+
+
+    public Iterable <User> findAll(){return  userRepository.findAll();}
     /**
      * Find if such email already exists
      *
@@ -41,6 +44,11 @@ public class UserService {
         return userRepository.findByEmail(Email);
     }
 
+    /**
+     * Delete user
+     * @param id
+     */
+    public void deleteById(Integer id) { userRepository.deleteById(id);}
     /**
      * Find if such UserName already exists
      *
@@ -113,7 +121,7 @@ public class UserService {
         user.setDate_of_birth(userUpdateDTO.getDate_of_birth());
         user.setGender(userUpdateDTO.getGender());
 
-        return userRepository.save(user);
+        return saveUser(user);
     }
 
     /**
@@ -123,7 +131,7 @@ public class UserService {
      */
     public void GreetingNotification(User user) {
         try {
-            notificationService.sendNotification(user);
+            notificationService.sendGreeting(user);
         } catch (MailException e) {
             //catch error
             logger.info("Error Sending Email: " + e.getMessage());

@@ -39,7 +39,7 @@ public class NotificationService {
             context.setVariable("link", "http://localhost:8080/signup/activation?token="+token);
 
             //create HTML template and pass the variables to it
-            String body = templateEngine.process("Verification", context);
+            String body = templateEngine.process("signup/Verification", context);
 
             //Send verification email
 
@@ -64,14 +64,13 @@ public class NotificationService {
      * @throws MailException
      */
 
-    public void  sendNotification(User user) throws MailException {
+    public void  sendGreeting(User user) throws MailException {
         // send email
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("alexsandrgun@gmail.com");
         mail.setSubject("Greeting");
         mail.setText("Thank you for registering!");
-
         javaMailSender.send(mail);
     }
 }

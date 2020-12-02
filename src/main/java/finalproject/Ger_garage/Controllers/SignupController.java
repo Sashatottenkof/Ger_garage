@@ -37,7 +37,7 @@ public class SignupController {
     public String displayAddUserForm(Model model) {
         model.addAttribute(new User());
 //		model.addAttribute(Gender.values());
-        return "signup";
+        return "signup/signup";
     }
 
     /**
@@ -47,7 +47,7 @@ public class SignupController {
      * @return
      */
     @PostMapping
-    public String addUser(@ModelAttribute @Valid User user, Errors errors) {
+    public String addUser(@ModelAttribute @Valid User user, Errors errors, Model model) {
 
         //checking if a user with this email has already existed
         User existingEmail = userService.findByEmail(user.getEmail());
@@ -66,20 +66,21 @@ public class SignupController {
 
         // if any errors, we reload the "sign up" page
         if (errors.hasErrors()) {
-            return "signup";
+            return "signup/signup";
         }
 
         // we have to give a role to the user, by default it is "ROLE_USER"
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         // save user into database
         userService.registration(user);
-        //send greeting email
-        userService.GreetingNotification(user);
-
-        return "redirect:login?success";
+        //After registration user goes to Success page that notifies him that email is send to his mail
+        model.addAttribute("message", "Verification email has been send. Please check your mailbox.");
+        return "signup/success";
     }
 
+
     /**
+     * verify token
      * Display activation page
      *
      * @param token
@@ -104,7 +105,7 @@ public class SignupController {
 
                 //check if the token is expired
                 if (verificationToken.getExpiryDate().before(currentTimestamp)) {
-                    model.addAttribute("massage", "Your verification token is expired.");
+                    model.addAttribute("message", "Your verification token is expired.");
                 } else {
 
                     //the token is valid
@@ -112,15 +113,18 @@ public class SignupController {
                     user.setEnabled(true);
                     // update the user
                     userService.saveUser(user);
-                    model.addAttribute("massage", "Your account is successfully activated.");
+                    model.addAttribute("message", "Your account is successfully activated.");
+                    //send greeting email
+                    userService.GreetingNotification(user);
                 }
 
             } else {
                 // the user account is already activated
-                model.addAttribute("massage", "Your account is already activated.");
+                model.addAttribute("message", "Your account is already activated.");
+
             }
         }
 
-        return "activation";
+        return "signup/activation";
     }
 }

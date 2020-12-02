@@ -11,9 +11,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import finalproject.Ger_garage.Models.Booking;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Repository
 public interface BookingRepository extends CrudRepository<Booking, Integer>{
 
 
@@ -27,7 +28,7 @@ public interface BookingRepository extends CrudRepository<Booking, Integer>{
 //	public Collection<Booking> findAll();
 
 
-	//checking bookink with the same date and time
+	//checking booking with the same date and time
 	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:newDate) AND TIME(time) = TIME(:newTime)", nativeQuery = true)
 	public Booking findByDateAndTime(@Param("newDate") LocalDate date, @Param("newTime")  LocalTime time);
 
@@ -52,7 +53,7 @@ public interface BookingRepository extends CrudRepository<Booking, Integer>{
 
 	//bookings of specific mechanic on specific day
 	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:pickedDay) AND MECHANIC_ID = :mechanic", nativeQuery = true)
-	public List<Booking> meckanicBookings(@Param("pickedDay") LocalDate date,@Param("mechanic")  Integer Id);
+	public List<Booking> mechanicBookings(@Param("pickedDay") LocalDate date,@Param("mechanic")  Integer Id);
 
 //	public Booking findByVehicle_id();
 }
