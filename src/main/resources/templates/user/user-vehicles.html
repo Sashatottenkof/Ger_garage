@@ -1,69 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="utf-8">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
-    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
     <title>User's vehicles</title>
 </head>
 <body>
 
 
-<header th:replace="fragments :: navigation"></header>
-<h1>User's Vehicles</h1>
+<div layout:fragment="content">
+    <h1>User's Vehicles</h1>
 
-<div th:unless="${userVehicles.empty}">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Type</th>
-            <th>Licence</th>
-            <th>Engine</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Mileage</th>
-            <th>Age</th>
-            <th>Details</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div th:unless="${userVehicles.empty}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Licence</th>
+                <th>Engine</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Mileage</th>
+                <th>Age</th>
+                <th>Details</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <tr th:each="vehicle : ${userVehicles}">
-            <td th:text="${vehicle.vehicle_id}"></td>
-            <td th:text="${vehicle.type}"></td>
-            <td th:text="${vehicle.licence}"></td>
-            <td th:text="${vehicle.engine}"></td>
-            <td th:text="${vehicle.make}"></td>
-            <td th:text="${vehicle.model}"></td>
-            <td th:text="${vehicle.mileage}"></td>
-            <td th:text="${vehicle.age}"></td>
-            <td th:text="${vehicle.other_details}"></td>
-            <td>
-                <form th:action="@{/user/vehicle/delete}" method="post">
-                    <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
-                    <input  class="btn btn-dark"  type="submit" value="Delete">
-                </form>
-            </td>
-            <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-        </tr>
-        </tbody>
+            <tr th:each="vehicle : ${userVehicles}">
+                <td th:text="${vehicle.vehicle_id}"></td>
+                <td th:text="${vehicle.type}"></td>
+                <td th:text="${vehicle.licence}"></td>
+                <td th:text="${vehicle.engine}"></td>
+                <td th:text="${vehicle.make}"></td>
+                <td th:text="${vehicle.model}"></td>
+                <td th:text="${vehicle.mileage}"></td>
+                <td th:text="${vehicle.age}"></td>
+                <td th:text="${vehicle.other_details}"></td>
+                <td>
+                    <form th:action="@{/user/vehicle/delete}" method="post">
+                        <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
+                        <input class="btn btn-dark" type="submit" value="Delete">
+                    </form>
+                </td>
+                <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
+            </tr>
+            </tbody>
 
-    </table>
-    <div class="text-center">
-    <a  class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+        </table>
+        <div class="text-center">
+            <a class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+        </div>
     </div>
+
+
+    <div th:unless="${!userVehicles.empty}">
+        <p> You don't have any registered vehicles</p>
+        <a class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a Vehicle</a>
+    </div>
+
 </div>
-
-
-<div th:unless="${!userVehicles.empty}">
-    <p> You don't have any registered vehicles</p>
-    <a  class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a Vehicle</a>
-</div>
-
-<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

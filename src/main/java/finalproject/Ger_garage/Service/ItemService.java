@@ -20,6 +20,7 @@ public class ItemService {
      * @param bookingId
      * @param itemId
      */
+
     public void addItem(Integer bookingId, Integer itemId) {
         Booking booking = bookingService.findById(bookingId);
         Item item = findById(itemId);

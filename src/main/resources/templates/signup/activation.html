@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="utf-8">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
-    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
     <title>Activation</title>
 </head>
 <body>
-<header th:replace="fragments :: navigation"></header>
 
-<div class="login-dark">
-    <form>
-        <div class="alert alert-info">
-            <p th:if="${message}" th:text="${message}">Message</p>
-        </div>
-        <div class="form-group col-xs-offset-8 col-xs-4">
-            <a th:href="@{/login}" class="btn btn-primary btn-block btn-flat">Login</a>
-        </div>
-    </form>
+<div layout:fragment="content">
+
+
+    <div class="login-dark">
+        <form>
+            <div class="alert alert-info">
+                <p th:if="${message}" th:text="${message}">Message</p>
+            </div>
+            <div class="form-group col-xs-offset-8 col-xs-4">
+                <a th:href="@{/login}" class="btn btn-primary btn-block btn-flat">Login</a>
+            </div>
+        </form>
+    </div>
+
 </div>
-<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

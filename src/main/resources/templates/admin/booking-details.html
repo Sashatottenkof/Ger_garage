@@ -1,143 +1,143 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="utf-8">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
-    <link th:rel="stylesheet" th:href="@{/bootstrap.css} "/>
     <title>Booking</title>
 </head>
 <body>
 
-
-<header th:replace="fragments :: navigation"></header>
-
-<h1 th:text="'Booking Id: ' + ${booking.id}"></h1>
-<div>
+<div layout:fragment="content">
+    <h1 th:text="'Booking Id: ' + ${booking.id}"></h1>
     <div>
+        <div>
 
-        <form action="#" th:action="@{/admin/update}" method="post">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Vehicle</th>
-                    <th>Customer ID</th>
-                    <th>Customer First Name</th>
-                    <th>Customer Last Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Comments</th>
-                    <th>Status</th>
-                    <th>Mechanic</th>
-                    <th>Additional Items</th>
-                    <th>Total Price</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
+            <form action="#" th:action="@{/admin/update}" method="post">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Vehicle</th>
+                        <th>Customer ID</th>
+                        <th>Customer First Name</th>
+                        <th>Customer Last Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Comments</th>
+                        <th>Status</th>
+                        <th>Mechanic</th>
+                        <th>Additional Items</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <tr>
-                    <td th:text="${booking.id}"></td>
-                    <input type="hidden" th:field="${booking.id}">
-                    <td th:text="${booking.type}"></td>
-                    <input type="hidden" th:field="${booking.type}">
-                    <td th:text="${booking.vehicle.model}"></td>
-                    <input type="hidden" th:field="${booking.vehicle.vehicle_id}">
-                    <td th:text="${booking.user.id}"></td>
-                    <input type="hidden" th:field="${booking.user.id}">
-                    <td th:text="${booking.user.first_name}"></td>
-                    <input type="hidden" th:field="${booking.user.first_name}">
-                    <td th:text="${booking.user.last_name}"></td>
-                    <input type="hidden" th:field="${booking.user.last_name}">
-                    <td th:text="${booking.bookingDate.date}"></td>
-                    <input type="hidden" th:field="${booking.bookingDate.date}">
-                    <td th:text="${booking.bookingDate.time}"></td>
-                    <input type="hidden" th:field="${booking.bookingDate.time}">
-                    <td th:text="${booking.comment}"></td>
-                    <input type="hidden" th:field="${booking.comment}">
-                    <td>
-                        <select th:field="${booking.status}">
-                            <option th:each="BookingStatus : ${T(finalproject.Ger_garage.Enums.BookingStatus).values()}"
-                                    th:value="${BookingStatus}"
-                                    th:text="${BookingStatus.displayBookingStatus}">
-                            </option>
-                        </select>
-                    </td>
-                    <td>
-                        <select th:field="${booking.mechanic.id}">
-                            <option th:each="mechanic : ${mechanics}"
-                                    th:value="${mechanic.id}"
-                                    th:text="${mechanic.firstName + ' ' + mechanic.lastName}">
-                            </option>
-                        </select>
-                        <p class="error" th:if="${#fields.hasErrors('booking.mechanic.id')}" th:errors="${booking.mechanic.id}"></p>
-                    </td>
-                    <td>
-                        <table class="table">
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                            </tr>
-                            <tr th:each="item : ${booking.items}">
-                                <td th:text="${item.id}"></td>
-                                <td th:text="${item.name}"></td>
-                                <td th:text="${item.price}"></td>
-                                <td><a th:href="@{/admin/deleteitem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Remove</a>
-                                </td>
-                                <!--                            <input type="hidden" th:field="*{booking[__${item.index}__].items}">-->
-                            </tr>
-                        </table>
-                    </td>
-
-
-                    <td th:text="${booking.price}"></td>
-                    <input type="hidden" th:field="${booking.price}">
-                    <!--                *{rows[__${rowStat.index}__].seedsPerCell}-->
-                    <td><input class="btn btn-dark" type="submit" value="Update"></td>
-
-                </tr>
+                    <tr>
+                        <td th:text="${booking.id}"></td>
+                        <input type="hidden" th:field="${booking.id}">
+                        <td th:text="${booking.type}"></td>
+                        <input type="hidden" th:field="${booking.type}">
+                        <td th:text="${booking.vehicle.model}"></td>
+                        <input type="hidden" th:field="${booking.vehicle.vehicle_id}">
+                        <td th:text="${booking.user.id}"></td>
+                        <input type="hidden" th:field="${booking.user.id}">
+                        <td th:text="${booking.user.first_name}"></td>
+                        <input type="hidden" th:field="${booking.user.first_name}">
+                        <td th:text="${booking.user.last_name}"></td>
+                        <input type="hidden" th:field="${booking.user.last_name}">
+                        <td th:text="${booking.bookingDate.date}"></td>
+                        <input type="hidden" th:field="${booking.bookingDate.date}">
+                        <td th:text="${booking.bookingDate.time}"></td>
+                        <input type="hidden" th:field="${booking.bookingDate.time}">
+                        <td th:text="${booking.comment}"></td>
+                        <input type="hidden" th:field="${booking.comment}">
+                        <td>
+                            <select th:field="${booking.status}">
+                                <option th:each="BookingStatus : ${T(finalproject.Ger_garage.Enums.BookingStatus).values()}"
+                                        th:value="${BookingStatus}"
+                                        th:text="${BookingStatus.displayBookingStatus}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select th:field="${booking.mechanic.id}">
+                                <option th:each="mechanic : ${mechanics}"
+                                        th:value="${mechanic.id}"
+                                        th:text="${mechanic.firstName + ' ' + mechanic.lastName}">
+                                </option>
+                            </select>
+                            <p class="error" th:if="${#fields.hasErrors('booking.mechanic.id')}"
+                               th:errors="${booking.mechanic.id}"></p>
+                        </td>
+                        <td>
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                </tr>
+                                <tr th:each="item : ${booking.items}">
+                                    <td th:text="${item.id}"></td>
+                                    <td th:text="${item.name}"></td>
+                                    <td th:text="${item.price}"></td>
+                                    <td>
+                                        <a th:href="@{/admin/deleteitem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Remove</a>
+                                    </td>
+                                    <!--                            <input type="hidden" th:field="*{booking[__${item.index}__].items}">-->
+                                </tr>
+                            </table>
+                        </td>
 
 
-                </tbody>
+                        <td th:text="${booking.price}"></td>
+                        <input type="hidden" th:field="${booking.price}">
+                        <!--                *{rows[__${rowStat.index}__].seedsPerCell}-->
+                        <td><input class="btn btn-dark" type="submit" value="Update"></td>
 
-            </table>
-        </form>
-
-
-    </div>
-
-
-    <div class="card-body">
-        <div class="text-center">
-            <table class="table-bordered" id="table-items">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nme</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr th:each="item : ${items}">
-                    <td th:text="${item.id}"></td>
-                    <td th:text="${item.name}"></td>
-                    <td th:text="${item.price}"></td>
-                    <td><a th:href="@{/admin/additem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Add</a></td>
-                </tr>
+                    </tr>
 
 
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
+            </form>
+
+
+        </div>
+
+
+        <div class="card-body">
+            <div class="text-center">
+                <table class="table-bordered" id="table-items">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nme</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="item : ${items}">
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.name}"></td>
+                        <td th:text="${item.price}"></td>
+                        <td><a th:href="@{/admin/additem/{id}/{itemId}(id=${booking.id},itemId=${item.id})}">Add</a>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+
+                </table>
+            </div>
         </div>
     </div>
+
 </div>
-<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

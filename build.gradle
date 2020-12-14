@@ -13,8 +13,7 @@ repositories {
 }
 
 dependencies {
-    //thymeleaf template engine
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 
 	// to connect to database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -28,12 +27,28 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	runtimeOnly 'mysql:mysql-connector-java'
-	
+
+	// Email service
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// to use autoloader to save time in developing
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//thymeleaf template engine
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 	//Thymeleaf security requered for rendering authentificated user on html page
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
+	//layout dialect for thymeleaf
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.1'
+	/**
+	 * Webjars
+	 */
+
 	// webjar for bootstrap
 	implementation 'org.webjars:bootstrap:4.5.0'
+
 	// uploads tempusdominus a JavaScript library for creating datetime pickers.
 	implementation 'org.webjars:webjars-locator:0.40'
 
@@ -43,15 +58,13 @@ dependencies {
 	//date-time picker
 	implementation 'org.webjars:bootstrap-datetimepicker:6aa746736d'
 
-	// Email service
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	// to use autoloader to save time in developing
-	 developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	  
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
 }
 
 test {

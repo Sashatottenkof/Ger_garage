@@ -2,7 +2,6 @@ package finalproject.Ger_garage.Controllers;
 
 import finalproject.Ger_garage.DTO.ParameterDate;
 import finalproject.Ger_garage.Models.*;
-import finalproject.Ger_garage.Repositories.BookingRepository;
 import finalproject.Ger_garage.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.List;
+
 
 
 @Controller
@@ -190,7 +189,7 @@ public class AdminController {
             return "admin/booking-details";
         }
 
-        bookingService.save(booking);
+        bookingService.save(newBooking);
         return "redirect:bookings?updated";
     }
 
