@@ -7,6 +7,14 @@ The shop has small number of staff who work there.
 Web service allows customers to book their vehicles for a check-up or service.
 
 
+Car-repair shop, It’s a Web project using Spring Framework in java, Spring Boot in back-end with 
+Thymeleaf template engine for manage front-end, 
+In addition to Spring Security to handle authentication and authorization,
+And Java Persistence API (JPA) with entity manager to handle MySql connector with database. 
+Entity classes defined and two Structural Patterns Services and Dao(Repositories),
+And using Gradle build tool to manage project architecture for classes, resources and dependencies. 
+
+
 ## Web Service Requirements:
 
 1) Customer has to be able to register on the website;
@@ -26,12 +34,17 @@ Web service allows customers to book their vehicles for a check-up or service.
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
 
-![Physical Data Base Design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/DataBase_schema.png)
+![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/DataBase_schema.png)
+Physical Data Base Design
 
+
+![Functionality](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/Functionality.png)
+General look at New Visitor Functionality
 
 ## Web Service has additional features:
 
 • Users email verification and email notification after successful registration;
+
 • Expiration token for logged in user (24 hours);
 
 
@@ -63,9 +76,13 @@ Web service allows customers to book their vehicles for a check-up or service.
 
 ## To Start
 
-Change email settings to your email;
+
+Change email settings to use your email for notification purposes;
 
 Set up a database in a Docker container or any other suitable way. 
+
+Settings for docker container:
+
 
 **$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql**
 
@@ -73,4 +90,7 @@ Set up a database in a Docker container or any other suitable way.
 
 http://localhost:8080/
 
+Default users:
 
+email: admin@gmail.com; pass: 1111;
+email: user@gmail.com; pass: 2222;
