@@ -26,7 +26,7 @@ Web service allows customers to book their vehicles for a check-up or service.
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
 
-![Physical Data Base Design](https://github.com/Sashatottenkof/Ger_garage/src/main/resources/static/images/ReadMe/DataBase_schema.png)
+![Physical Data Base Design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/DataBase_schema.png)
 
 
 ## Web Service has additional features:
