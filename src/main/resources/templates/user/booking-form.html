@@ -5,20 +5,18 @@
       layout:decorate="~{layout}">
 <head>
 
-    <!--    <link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/5.0/tempusdominus-bootstrap-4.min.css}"/>-->
+    <link th:rel="stylesheet" th:href="@{/CSS/calendar.css} "/>
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 
 
-    <script type="text/javascript" th:src="@{/script.js}"></script>
+    <script type="text/javascript" th:src="@{/script/calendar.js}"></script>
 
     <title>Add booking</title>
 </head>
@@ -52,9 +50,14 @@
                             <select th:field="${booking.type}" th:onchange="showPrice()">
                                 <option th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
                                         th:value="${typeService}"
-                                        th:text="${typeService.displayServiceType}">
+                                        th:text="${typeService.type}">
                                 </option>
                             </select>
+                        </div>
+
+                        <div>
+<!--                            <p th:text="${ServiceType.price}" id="results-block">-->
+<!--                            </p>-->
                         </div>
 
 
@@ -127,8 +130,19 @@
 </div>
 
 
-
 <script th:inline="javascript">
+var price = [[${booking.type.price}]];
+
+
+      function showPrice() {
+                var price = document.getElementById("price");
+               choice = $("#booking.type option:selected").index();
+                price =
+                [[${booking.type}]];
+            }
+            $(function() { showPrice(); });
+
+
 /*<![CDATA[*/
 <!--  var availableDates = ["9-6-2020","14-6-2020","15-6-2020"];-->
 
@@ -170,6 +184,8 @@
 
 
 /*]]>*/
+
+
 
 
 

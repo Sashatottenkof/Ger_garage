@@ -1,14 +1,18 @@
 # Ger_garage
 Web Service for car-repair shop
-The Web application is designed for small car-repair shop “Ger’s Garage”, That shop carries out maintenance checks for all kinds of small to medium vehicles (i.e. motorbikes, cars, small vans and small buses). It also sells require parts or other supplies to its customers if required. Ger has a small number of staff who work with him.
+The Web application is designed for small car-repair shop “Ger’s Garage”. 
+The shop carries out maintenance checks for all kinds of small to medium vehicles (i.e. motorbikes, cars, small vans and small buses).
+It also sells require parts or other supplies to its customers if required. 
+The shop has small number of staff who work there.
 Web service allows customers to book their vehicles for a check-up or service.
 
 
 ## Web Service Requirements:
+
 1) Customer has to be able to register on the website;
 2) Customers details and information about his bookings should be saved in the service system;
 3) Customer can book a vehicle for a service or repair;
-4) At least 4 types of bookings available:
+4) At least 4 types of booking available:
 5) Only 4 bookings on one day can be done.
 6) Sunday is not available for booking;
 7) Customer should provide information about vehicle;
@@ -21,13 +25,23 @@ Web service allows customers to book their vehicles for a check-up or service.
 14) Owner can add additional item to the cost of service;
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
-## During the development following tools and technologies have been used:
+
+![Physical Data Base Design](https://github.com/Sashatottenkof/Ger_garage/src/main/resources/static/images/ReadMe/DataBase_schema.png)
+
+
+## Web Service has additional features:
+
+• Users email verification and email notification after successful registration;
+• Expiration token for logged in user (24 hours);
+
+
+## During the development following tools and technologies are being used:
 
 • SpringBoot - a core of backend; 
 
 • MySQL - data base;
 
-• Worckbench;
+• Workbench;
 
 • Hibernate -  to set up connection between java source code and MySQL database and manipulate data with little coding;
 
@@ -43,13 +57,15 @@ Web service allows customers to book their vehicles for a check-up or service.
 
 • Bootstrap;
 
-• Docker - was used to run database during development and deploy whole web application on a Google Cloud Platform.
+• Docker - was used to run a database during development part and deploy whole web application on the Google Cloud Platform.
 
 • Google Engine - was used as a live-server to deploy the app;
 
 ## To Start
 
-Set up a database in a Docker container 
+Change email settings to your email;
+
+Set up a database in a Docker container or any other suitable way. 
 
 **$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql**
 

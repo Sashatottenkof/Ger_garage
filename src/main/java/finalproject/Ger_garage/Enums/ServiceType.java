@@ -7,24 +7,24 @@ public enum ServiceType {
 	MAJOR_REPAIR("Major Repair", 400.00);
 	
 	
-	private String displayServiceType;
+	private String type;
 	private double price;
 
-	private ServiceType(String displayServiceType) {
-		this.displayServiceType = displayServiceType;
+	private ServiceType(String type) {
+		this.type = type;
 	}
 
-	ServiceType(String displayServiceType, double price) {
-		this.displayServiceType = displayServiceType;
+	ServiceType(String  type, double price) {
+		this.type =  type;
 		this.price = price;
 	}
 
-	public String getDisplayServiceType() {
-		return displayServiceType;
+	public String getType() {
+		return  type;
 	}
 
-	public void setDisplayServiceType(String displayServiceType) {
-		this.displayServiceType = displayServiceType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public double getPrice() {

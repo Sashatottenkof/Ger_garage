@@ -180,5 +180,4 @@ public class Booking {
         this.price = price;
     }
 
-
 }

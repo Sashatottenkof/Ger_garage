@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .and()
             .authorizeRequests()
             //we have to give an access to the styles resources for all visitors
-            .antMatchers("/resources/**", "/webjars/**","/assets/**", "/*.css","/*.jpg","/*.js","/images/**").permitAll()
+            .antMatchers("/resources/**", "/webjars/**","/assets/**", "/images/**","/CSS/**","/script/**").permitAll()
              .antMatchers("/signup/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
