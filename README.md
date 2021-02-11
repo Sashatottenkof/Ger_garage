@@ -1,5 +1,5 @@
 # Ger_garage
-Web Service for car-repair shop
+
 The Web application is designed for small car-repair shop “Ger’s Garage”. 
 The shop carries out maintenance checks for all kinds of small to medium vehicles (i.e. motorbikes, cars, small vans and small buses).
 It also sells require parts or other supplies to its customers if required. 
@@ -10,7 +10,8 @@ Web service allows customers to book their vehicles for a check-up or service.
 Car-repair shop, It’s a Web project using Spring Framework in java, Spring Boot in back-end with 
 Thymeleaf template engine for manage front-end, 
 In addition to Spring Security to handle authentication and authorization,
-And Java Persistence API (JPA) with entity manager to handle MySql connector with database. 
+And Java Persistence API (JPA) with entity manager to handle MySql connector with database. The Service
+follows three-layer architecture.
 Entity classes defined and two Structural Patterns Services and Dao(Repositories),
 And using Gradle build tool to manage project architecture for classes, resources and dependencies. 
 
@@ -46,6 +47,8 @@ General look at New Visitor Functionality
 • Users email verification and email notification after successful registration;
 
 • Expiration token for logged in user (24 hours);
+
+• User can alter its details after registration;
 
 
 ## During the development following tools and technologies are being used:
