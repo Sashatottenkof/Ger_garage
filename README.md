@@ -35,11 +35,11 @@ And using Gradle build tool to manage project architecture for classes, resource
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
 
-![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/DataBase_schema.png)
+![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/DataBase_schema.png)
 Physical Data Base Design
 
 
-![Functionality](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/ReadMe/Functionality.png)
+![Functionality](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/Functionality.png)
 General look at New Visitor Functionality
 
 ## Web Service has additional features:

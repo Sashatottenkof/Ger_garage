@@ -1,25 +1,8 @@
-//$(document).ready(function(){
-//
-//$("#test").hover(function(){alert("Hello! I am an alert box!!")});
-//
-//})
 
-
-//function myFunction() {
-//    alert("Hello! I am an alert box!");
-//  }
-//
-//  window.onload = function() {
-//
-//      alert( "welcome" );
-//
-//  };
-
-
-//datepicker
+// .ready executes functions as soon as a page gets loaded
 $(document).ready(function(){
 
-
+//datepicker
 //Restricts user for choosing specific dates in datetime picker
    $('#datetimepicker1').datetimepicker({
 <!--        disabledDates: disabledDate,-->
@@ -33,4 +16,23 @@ $(document).ready(function(){
 <!--       hoursDisabled: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '18', '19', '20', '21', '22', '23']-->
     });
 
-    })
+
+
+
+
+//calls function on start
+totalPrice();
+//call function on change
+$('#serviceOption').change(totalPrice);
+
+})
+
+
+
+// the function changes the total price depends on th chousen option
+function totalPrice() {
+        let TotalPrice= ($('#serviceOption').find(':selected').data('price'));
+        $('#totalPrice').text(TotalPrice);
+   
+};
+

@@ -4,9 +4,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css} "/>
-    <link th:rel="stylesheet" th:href="@{/CSS/bootstrap.css} "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--    <link th:rel="preload"  th:href="@{/webjars/font-awesome/5.13.1/webfonts/fa-solid-900.woff2}"  th:as="font" th:type="font/woff2"  th:crossorigin="anonymous"/>-->
+
+<!--    <link th:rel="preload" th:as="font" th:href="@{/webjars/font-awesome/5.13.1/webfonts/fa-solid-900.woff2"  th:type="font/woff2"  th:crossorigin="anonymous" />-->
+<!--    <link th:rel="preload" th:as="font" th:href="@{/webjars/font-awesome/5.13.1/webfonts/fa-brands-400.woff2"  th:type="font/woff2"  th:crossorigin="anonymous" />-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.13.1/css/all.css}" />
+    <link th:rel="stylesheet" th:href="@{/CSS/bootstrap.css}"/>
+    <link th:rel="icon" th:href="@{/images/tab-image.png}">
 
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -18,6 +25,7 @@
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Ger's Garage</title>
 </head>
 <body>
+
 
 <header th:replace="fragments :: navigation"></header>
 

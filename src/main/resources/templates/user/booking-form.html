@@ -31,34 +31,35 @@
                 <h3 class="mb-0">Book a Service</h3>
             </div>
 
-            <div id='wrap'>
+<!--            <div id='wrap'>-->
 
-                <div id='calendar'></div>
+<!--                <div id='calendar'></div>-->
 
-                <div style='clear:both'></div>
-            </div>
+<!--                <div style='clear:both'></div>-->
+<!--            </div>-->
 
 
             <div class="card-body">
 
+                <div>
+                    <p>Total price:</p>
+                    <p id="totalPrice"></p>
+                </div>
 
                 <div th:unless="${userVehicles.empty}">
                     <form class="form" action="#" th:action="@{/user/book}" method="post">
 
                         <div class="form-group">
                             <label>Type of Service</label>
-                            <select th:field="${booking.type}" th:onchange="showPrice()">
+                            <select id="serviceOption"  th:field="${booking.type}" >
                                 <option th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
                                         th:value="${typeService}"
-                                        th:text="${typeService.type}">
+                                        th:text="${typeService.type}"
+                                        th:data-price="${typeService.price}">
                                 </option>
                             </select>
                         </div>
 
-                        <div>
-<!--                            <p th:text="${ServiceType.price}" id="results-block">-->
-<!--                            </p>-->
-                        </div>
 
 
                         <div class="form-group">
@@ -131,16 +132,16 @@
 
 
 <script th:inline="javascript">
-var price = [[${booking.type.price}]];
+// var price = [[${booking.type.price}]];
 
 
-      function showPrice() {
-                var price = document.getElementById("price");
-               choice = $("#booking.type option:selected").index();
-                price =
-                [[${booking.type}]];
-            }
-            $(function() { showPrice(); });
+//       function showPrice() {
+//                 var price = document.getElementById("price");
+//                choice = $("#booking.type option:selected").index();
+//                 price =
+//                 [[${booking.type}]];
+//             }
+//             $(function() { showPrice(); });
 
 
 /*<![CDATA[*/
@@ -180,6 +181,8 @@ var price = [[${booking.type.price}]];
 
 <!--var disabledDate = ['2020-8-18', '2020-8-19','2020-8-20'];-->
 <!--var disabledDate =  [[${dates}]];-->
+
+var UserOption  = document.getElementById('usersChoice').value;
 
 
 
