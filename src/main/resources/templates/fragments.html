@@ -6,100 +6,88 @@
     <meta charset="utf-8">
     <title>fragment</title>
 </head>
-<body>
+<body >
 
 <header th:fragment="navigation">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top mainNav" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">Ger's Garage</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Ger's Garage</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/users">Users</a>
-                        </li>
-                    </div>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/bookings">List of Bookings</a>
-                        </li>
-                    </div>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Contact</a></li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/details/">User Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/vehicles">My Vehicles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/bookings">My Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/book">Make a Booking</a>
-                    </li>
-
-                    <div sec:authorize="isAnonymous()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/signup">Sign Up</a>
-                        </li>
-                    </div>
-
-                    <div sec:authorize="isAnonymous()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Log In</a>
-                        </li>
-                    </div>
-                    <div sec:authorize="isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Log Out</a>
-                        </li>
-                    </div>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link js-scroll-trigger" href="/admin/users">Users</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link js-scroll-trigger" href="/admin/bookings">List of Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/details">User Details</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/vehicles">My Vehicles</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/bookings">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/book">Make a Booking</a></li>
+                    <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link js-scroll-trigger" href="/signup">Sign Up</a></li>
+                    <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link js-scroll-trigger" href="/login">Log In</a></li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link js-scroll-trigger" href="/logout">Log out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-
-    <header class="py-5 bg-image-full" style="background-image: url('/images/headerImage.jpg');">
-    </header>
-
 </header>
 
 
-<footer th:fragment="footer" id="footer" class="py-5 bg-dark">
+
+<footer th:fragment="footer">
+<!-- Contact-->
+<section class="contact-section bg-black">
     <div class="container">
-        <p class="m-0 text-center text-white">Contacts</p>
-        <i class="fab fa-facebook fa-lg"></i>
-        <i class="fab fa-github fa-lg"></i>
-        <i class="fab fa-instagram fa-lg"></i>
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Address</h4>
+                        <hr class="my-4" />
+                        <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Email</h4>
+                        <hr class="my-4" />
+                        <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Phone</h4>
+                        <hr class="my-4" />
+                        <div class="small text-black-50">+1 (555) 902-8832</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social d-flex justify-content-center">
+            <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+            <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+            <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+        </div>
     </div>
-    <!-- /.container -->
+</section>
+    <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Created by Aleksandr Reshetov 2020</div></footer>
 </footer>
 
-<!--	<nav th:fragment="navigation">-->
-<!--		<ul>-->
-<!--			<li><a href="/admin/users"> Users</a></li>-->
-<!--			<li><a href="/admin/bookings">All Bookings</a></li>-->
-<!--			<li><a href="/signup">Sign Up</a></li>-->
-<!--			<li><a href="/user/details/">User details</a></li>-->
-<!--			<li><a href="/user/update">Update User</a></li>-->
-<!--			<li><a href="/user/vehicles">My vehicles</a></li>-->
-<!--			<li><a href="/user/bookings">My bookings</a></li>-->
-<!--			<li><a href="/user/book">Make a bookings</a></li>-->
-<!--			<li><a href="/login">Log In</a></li>-->
-<!--		</ul>-->
 
-
-<!--	</nav>-->
 
 </body>
 </html>

@@ -1,39 +1,30 @@
-body {
-	padding-top: 56px;
-}
 
-#footer {
-	position: fixed;
-	height: 100px;
-	bottom: 0;
-	width: 100%;
-}
-
-.bg-image-full {
-	/*    background-image: url("/images/headerImage.jpg");*/
-	height: 200px;
-	background: no-repeat center center scroll;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	-o-background-size: cover;
+/* sub-title */
+h2.sub-title {
+    font-family: Colfax-Bold,Helvetica,Arial,sans-serif;
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 35px;
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
-/*.login-dark {
-  height:1000px;
-  background:#475d62 url(../../assets/img/star-sky.jpg);
-  background-size:cover;
-  position:relative;
-}*/
 
+.total-price{
+margin-bottom: 1rem;
+text-align:center;
+font-size: 25px;
+}
 
 /* login form */
 
 .login-dark form {
 	max-width: 320px;
 	width: 90%;
-	background-color: #212529;
+	background-color: rgba(0,0,0,0.5);
+
 	padding: 40px;
 	border-radius: 4px;
 	transform: translate(-50%, -50%);
@@ -62,7 +53,6 @@ body {
 }
 
 .login-dark form .btn-primary {
-	background: #214a80;
 	border: none;
 	border-radius: 4px;
 	padding: 11px;
@@ -118,3 +108,80 @@ body {
 	margin: 0px auto;
 	float: none;
 }
+
+
+/* forms */
+
+/* booking form */
+.form-container{
+max-width: 500px;
+	width: 90%;
+	background-color: rgba(0,0,0,0.5);
+	padding: 40px;
+	border-radius: 4px;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #fff;
+	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+@media (max-width: 800px) {
+  .form-container {
+  top: 80%;
+  }
+}
+
+.form-container .illustration {
+	text-align: center;
+	padding: 15px 0 20px;
+	font-size: 100px;
+	color: #2980ef;
+}
+
+
+.form-container form .btn-primary {
+	border: none;
+	border-radius: 4px;
+	padding: 11px;
+	box-shadow: none;
+	margin-top: 26px;
+	text-shadow: none;
+	outline: none;
+}
+
+
+/* for long forms */
+.long-form-container{
+height: 80% !important;
+max-width: 600px;
+	width: 90%;
+	background-color: rgba(0,0,0,0.5);
+
+	padding: 40px;
+	border-radius: 4px;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #fff;
+	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+label{
+color:rgba(255, 255, 255, 0.5);
+}
+
+.inline{
+display: inline-block;
+margin-left:15px;
+font-weight: 1000;
+
+}
+
+

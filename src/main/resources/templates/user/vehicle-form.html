@@ -11,13 +11,14 @@
 
 <div layout:fragment="content">
 
-    <section class="py-5">
 
-        <div class="col-md-6 offset-md-3">
-            <div class="card-header">
-                <h3 class="mb-0">Register A New Vehicle</h3>
-            </div>
-            <div class="card-body">
+    <!-- Masthead-->
+    <div class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="long-form-container">
+
+                <h2 class="sub-title">Register A New Vehicle</h2>
+
                 <form class="form" action="#" th:action="@{/user/vehicle}"
                       th:object="${vehicle}"
                       method="post">
@@ -76,11 +77,14 @@
                         <p class="error" th:if="${#fields.hasErrors('other_details')}" th:errors="*{other_details}"></p>
                     </div>
 
-                    <input class="btn btn-dark" type="submit" value="Add Vehicle">
+                    <input class="btn btn-primary btn-block btn-flat" type="submit" value="Add Vehicle">
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+
+
 </div>
+
 </body>
 </html>

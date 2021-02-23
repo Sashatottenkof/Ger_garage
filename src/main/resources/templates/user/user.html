@@ -8,60 +8,70 @@
     <title>User details</title>
 </head>
 <body>
-
+<!--    <div>-->
+<!--        <p sec:authentication="principal.username"></p>-->
+<!--    </div>-->
 <div layout:fragment="content">
 
-    <div>
-        <!--    <div>-->
-        <!--        <p sec:authentication="principal.username"></p>-->
-        <!--    </div>-->
 
-        <h1 th:text="${'User: ' + userId.username}"></h1>
-        <h2>User Details</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Phone</th>
-                <th>Birthday</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="${userId.id}"></td>
-                <td th:text="${userId.username}"></td>
-                <td th:text="${userId.email}"></td>
-                <td th:text="${userId.password}"></td>
-                <td th:text="${userId.first_name}"></td>
-                <td th:text="${userId.last_name}"></td>
-                <td th:text="${userId.gender}"></td>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="form-container">
 
-                <div th:unless="${userId.phone_number == null}">
-                    <td th:text="${userId.phone_number}"></td>
+                <h2 th:text="${'User: ' + userId.username}"></h2>
+                <div class="form-group">
+                    <label>Id:</label>
+                    <div class="inline" th:text="${userId.id}"></div>
                 </div>
 
-                <div th:unless="${userId.phone_number != null}">
-                    <td> None</td>
+                <div class="form-group">
+                    <label>User Name:</label>
+                    <div class="inline" th:text="${userId.username}">
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <div class="inline" th:text="${userId.email}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <div class="inline" th:text="${userId.first_name}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <div class="inline" th:text="${userId.last_name}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="inline" th:text="${userId.gender}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <div class="inline" th:unless="${userId.phone_number == null}">
+                        <div class="inline" th:text="${userId.phone_number}"></div>
+                    </div>
 
-                <td th:text="${userId.date_of_birth}"></td>
-                <td><a class="btn btn-dark" role="button" type="button" th:href="@{/user/update}">Change the Details</a>
-                </td>
-                <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-            </tr>
-            </tbody>
+                    <div class="inline"  th:unless="${userId.phone_number != null}">
+                        <div> None</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>date of Birth:</label>
+                    <div class="inline" th:text="${userId.date_of_birth}">
+                    </div>
+                </div>
+                <a class="btn btn-primary btn-block btn-flat" role="button" type="button" th:href="@{/user/update}">Change
+                    the
+                    Details</a>
 
-        </table>
-    </div>
-    <!-- <a th:href="@{/user/update/{id}(id=${userId.id})}">Change the details</a>-->
-
+            </div>
+        </div>
+    </header>
 
 </div>
 </body>

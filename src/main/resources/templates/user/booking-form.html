@@ -5,18 +5,12 @@
       layout:decorate="~{layout}">
 <head>
 
-    <link th:rel="stylesheet" th:href="@{/CSS/calendar.css} "/>
+    <!--    <link th:rel="stylesheet" th:href="@{/CSS/calendar.css} "/>-->
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"/>
 
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
-    <script type="text/javascript" th:src="@{/script/calendar.js}"></script>
+    <!--    <script type="text/javascript" th:src="@{/script/calendar.js}"></script>-->
 
     <title>Add booking</title>
 </head>
@@ -25,33 +19,30 @@
 
 <div layout:fragment="content">
 
-    <section class="py-5">
-        <div class="col-md-6 offset-md-3">
-            <div class="card-header">
-                <h3 class="mb-0">Book a Service</h3>
-            </div>
+    <div class="masthead">
+        <div class="container d-flex h-100 align-items-center">
 
-<!--            <div id='wrap'>-->
-
-<!--                <div id='calendar'></div>-->
-
-<!--                <div style='clear:both'></div>-->
-<!--            </div>-->
-
-
-            <div class="card-body">
-
-                <div>
-                    <p>Total price:</p>
-                    <p id="totalPrice"></p>
-                </div>
-
+            <div class="form-container">
                 <div th:unless="${userVehicles.empty}">
-                    <form class="form" action="#" th:action="@{/user/book}" method="post">
+
+
+                    <h2 class="sub-title">Book a Service</h2>
+
+                    <div class="total-price">
+                        <div>Total price:
+                            <div class="inline" id="totalPrice">
+                            </div>
+                            $
+                        </div>
+
+                    </div>
+
+                    <form class="well form-horizontal" action="#" th:action="@{/user/book}" method="post">
+
 
                         <div class="form-group">
                             <label>Type of Service</label>
-                            <select id="serviceOption"  th:field="${booking.type}" >
+                            <select id="serviceOption" th:field="${booking.type}">
                                 <option th:each="typeService : ${T(finalproject.Ger_garage.Enums.ServiceType).values()}"
                                         th:value="${typeService}"
                                         th:text="${typeService.type}"
@@ -59,7 +50,6 @@
                                 </option>
                             </select>
                         </div>
-
 
 
                         <div class="form-group">
@@ -113,86 +103,24 @@
                 </textarea>
                         </div>
 
-
-                        <input class="btn btn-dark" type="submit" value="To book">
-
+                        <div class="form-group col-xs-offset-8 col-xs-4">
+                            <input class="btn btn-primary btn-block btn-flat" type="submit" value="To book">
+                        </div>
 
                     </form>
 
                 </div>
                 <div th:unless="${!userVehicles.empty}">
                     <p> Before booking our service you have to register a vehicle </p>
-                    <a class="btn btn-dark" role="button" th:href="@{/user/vehicle}">Register a Vehicle</a>
+                    <a class="btn btn-primary btn-block btn-flat" role="button" th:href="@{/user/vehicle}">Register a Vehicle</a>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+
 
 </div>
-
-
-<script th:inline="javascript">
-// var price = [[${booking.type.price}]];
-
-
-//       function showPrice() {
-//                 var price = document.getElementById("price");
-//                choice = $("#booking.type option:selected").index();
-//                 price =
-//                 [[${booking.type}]];
-//             }
-//             $(function() { showPrice(); });
-
-
-/*<![CDATA[*/
-<!--  var availableDates = ["9-6-2020","14-6-2020","15-6-2020"];-->
-
-<!--function available(date) {-->
-<!--  dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();-->
-<!--  if ($.inArray(dmy, availableDates) !== -1) {-->
-<!--    return [true, "","Available"];-->
-<!--  } else {-->
-<!--    return [false,"","unAvailable"];-->
-<!--  }-->
-<!--}-->
-
-<!--      function showPrice() {-->
-<!--                var price = document.getElementById("price");-->
-<!--               choice = $("#booking.type option:selected").index();-->
-<!--                price =-->
-<!--&lt;!&ndash;                [[${booking.type}]];&ndash;&gt;-->
-<!--            }-->
-<!--            $(function() { showPrice(); });-->
-
-<!--    $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {-->
-<!--        icons: {-->
-<!--            time: 'far fa-clock',-->
-<!--            date: 'far fa-calendar',-->
-<!--            up: 'fas fa-arrow-up',-->
-<!--            down: 'fas fa-arrow-down',-->
-<!--            previous: 'fas fa-chevron-left',-->
-<!--            next: 'fas fa-chevron-right',-->
-<!--            today: 'far fa-calendar-check-o',-->
-<!--            clear: 'far fa-trash',-->
-<!--            close: 'far fa-times'-->
-<!--        } });-->
-
-
-
-<!--var disabledDate = ['2020-8-18', '2020-8-19','2020-8-20'];-->
-<!--var disabledDate =  [[${dates}]];-->
-
-var UserOption  = document.getElementById('usersChoice').value;
-
-
-
-/*]]>*/
-
-
-
-
-
-</script>
 
 </body>
 </html>

@@ -8,13 +8,21 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="login-dark">
-        <form>
-            <div class="alert alert-info">
-                <p th:if="${message}" th:text="${message}">Message</p>
+
+
+
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="login-dark">
+                <form>
+                    <div class="alert alert-info">
+                        <p th:if="${message}" th:text="${message}">Message</p>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+    </header>
 </div>
 </body>
 </html>

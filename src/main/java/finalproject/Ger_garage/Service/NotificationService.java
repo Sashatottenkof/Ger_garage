@@ -46,7 +46,7 @@ public class NotificationService {
             MimeMessage mail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(user.getEmail());
-            helper.setFrom("alexsandrgun@gmail.com");
+            helper.setFrom("gersgarage@repairman.com");
             helper.setSubject("email address verification");
             helper.setText(body, true);
 
