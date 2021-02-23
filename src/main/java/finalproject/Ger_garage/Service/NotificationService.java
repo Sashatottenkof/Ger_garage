@@ -36,8 +36,8 @@ public class NotificationService {
             String token = verificationToken.getToken();
             Context context = new Context();
             context.setVariable("title", "Verify your email");
-            context.setVariable("link", "http://localhost:8080/signup/activation?token="+token);
-
+            context.setVariable("link", "https://glacial-inlet-14504.herokuapp.com/signup/activation?token="+token);
+//"http://localhost:8080/
             //create HTML template and pass the variables to it
             String body = templateEngine.process("signup/Verification", context);
 
