@@ -68,7 +68,7 @@ public class NotificationService {
         // send email
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
-        mail.setFrom("alexsandrgun@gmail.com");
+        mail.setFrom("gersgarage@repairman.com");
         mail.setSubject("Greeting");
         mail.setText("Thank you for registering!");
         javaMailSender.send(mail);
