@@ -14,5 +14,4 @@ import org.springframework.stereotype.Repository;
 public interface VehicleRepository extends CrudRepository<Vehicle, Integer>{
 
 	public Collection<Vehicle> findByUser(User user);
-
 }

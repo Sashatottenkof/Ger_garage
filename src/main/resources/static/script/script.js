@@ -2,6 +2,8 @@
 // .ready executes functions as soon as a page gets loaded
 $(document).ready(function(){
 
+
+
 //datepicker
 //Restricts user for choosing specific dates in datetime picker
    $('#datetimepicker1').datetimepicker({
@@ -25,7 +27,30 @@ totalPrice();
 //call function on change
 $('#serviceOption').change(totalPrice);
 
+
+
+
+//users bookings table
+    $('#myBookingsTable').DataTable( {
+        "scrollX": true
+    } );
+//user vehicles table
+    $('#myVehiclesTable').DataTable( {
+        "scrollX": true
+    } );
+
+//all bookings for admin table
+    $('#allBookingsTable').DataTable( {
+        "scrollX": true
+    } );
+//table of items
+    $('#tableItems').DataTable( {
+        "scrollX": true
+    } );
 })
+
+
+
 
 
 
@@ -33,6 +58,9 @@ $('#serviceOption').change(totalPrice);
 function totalPrice() {
         let TotalPrice= ($('#serviceOption').find(':selected').data('price'));
         $('#totalPrice').text(TotalPrice);
-   
+
 };
+
+
+
 

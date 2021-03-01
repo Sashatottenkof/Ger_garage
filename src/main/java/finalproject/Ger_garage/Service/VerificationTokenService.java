@@ -6,6 +6,7 @@ import finalproject.Ger_garage.Models.VerificationToken;
 import finalproject.Ger_garage.Repositories.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -23,6 +24,10 @@ public class VerificationTokenService {
     public VerificationToken findByToken(String token) {
         return verificationTokenRepository.findByToken(token);
     }
+
+//    @Transactional
+    public void deleteTokenByUser(User user){verificationTokenRepository.deleteByUser(user);}
+
 
     public void saveToken(User user, String token) {
         VerificationToken verificationToken = new VerificationToken(user, token);

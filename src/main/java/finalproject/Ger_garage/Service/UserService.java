@@ -70,6 +70,13 @@ public class UserService {
     }
 
     /**
+     * one more option for deleting user
+     * @param user
+     */
+
+    public void deleteUser(User user) {userRepository.delete(user); }
+
+    /**
      * Saving User in a database
      *
      * @param user
@@ -99,10 +106,13 @@ public class UserService {
             }
             catch(Exception e){
                 e.printStackTrace();
+                // if email is not send, delete the token and user
+               verificationTokenService.deleteTokenByUser(user);
+               deleteUser(user);
             }
         });
 
-        return saved.get();
+        return findByEmail(user.getEmail());
     }
 
     /**

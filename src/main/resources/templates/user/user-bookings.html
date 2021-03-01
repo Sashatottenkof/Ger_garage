@@ -9,69 +9,85 @@
 <body>
 
 <div layout:fragment="content">
-    <h1>User's bookings</h1>
-    <div th:unless="${userBookings.empty}">
 
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Vehicle</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Comments</th>
-                <th>Status</th>
-                <th>Price</th>
-                <th>Details</th>
-            </tr>
-            </thead>
-            <tbody>
+    <!-- Masthead-->
+    <header class="masthead" id="mastheadTable">
 
-            <tr th:each="booking : ${userBookings}">
-                <td th:text="${booking.id}"></td>
-                <td th:text="${booking.type}"></td>
-                <td th:text="${booking.vehicle.model}"></td>
-                <td th:text="${booking.bookingDate.date}"></td>
-                <td th:text="${booking.bookingDate.time}"></td>
-                <td th:text="${booking.comment}"></td>
-                <td th:text="${booking.status}"></td>
-                <td th:text="${booking.price}"></td>
-                <div th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COMPLETED}">
-                    <td><a th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
+    </header>
+
+
+    <!-- main body-->
+    <section class="projects-section bg-light" id="projects">
+        <div class="container">
+            <div class="container  h-100 align-items-center">
+
+                <div th:unless="${userBookings.empty}">
+                    <h1 class="table-title">MY  BOOKINGS</h1>
+                    <!--users bookings table-->
+                    <table class="display" id="myBookingsTable"  style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Vehicle</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Details</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="booking : ${userBookings}">
+                            <td th:text="${booking.id}"></td>
+                            <td th:text="${booking.type}"></td>
+                            <td th:text="${booking.vehicle.model}"></td>
+                            <td th:text="${booking.bookingDate.date}"></td>
+                            <td th:text="${booking.bookingDate.time}"></td>
+                            <td th:text="${booking.comment}"></td>
+                            <td th:text="${booking.status}"></td>
+                            <td th:text="${booking.price}"></td>
+
+                            <!--if status is COMPLETED or COLLECTED show link to the receipt-->
+                            <td th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COMPLETED or booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COLLECTED}">
+                                <a
+                                        th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
+
+                            <td th:unless="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COMPLETED or booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COLLECTED }">
+                                ---
+                            </td>
+                            <td>
+                                <form th:action="@{/user/booking/delete}" method="post">
+                                    <input type="hidden" name="id" th:value="${booking.id}">
+                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
                 </div>
-                <div th:if="${booking.status == T(finalproject.Ger_garage.Enums.BookingStatus).COLLECTED}">
-                    <td><a th:href="@{/user/receipt/{id}(id=${booking.id})}">Receipt</a></td>
+                <!--if no bookings, show the link to a booking page-->
+                <div th:unless="${!userBookings.empty}">
+                    <div class="text-center">
+                        <p> You don't have any bookings</p>
+                        <a class="btn btn-primary" role="button" th:href="@{/user/book/}">Book a Service</a>
+                    </div>
                 </div>
-            </tr>
-
-            <!--        <td th:text="${vehicle.vehicle_id}"></td>-->
-
-            <!--	     <td>-->
-            <!--	    &lt;!&ndash;<form th:action="@{/user/vehicle/delete}"  method ="post">-->
-            <!--	    <input type="hidden" name= "id" th:value= "${vehicle.vehicle_id}">-->
-            <!--	    <input type="submit" value = "Delete">-->
-            <!--	     </form>&ndash;&gt;-->
-            <!--	    </td>-->
-
-            <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-
-            </tbody>
-
-        </table>
-    </div>
-
-    <div th:unless="${!userBookings.empty}">
-        <div class="text-center">
-            <p> You don't have any bookings</p>
-            <a class="btn btn-dark" role="button" th:href="@{/user/book/}">Book a Service</a>
+            </div>
         </div>
-    </div>
-    <div>
+    </section>
 
 
-    </div>
+
 </div>
+
+
 </body>
 </html>

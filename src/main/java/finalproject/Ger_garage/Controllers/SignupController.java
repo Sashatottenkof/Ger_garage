@@ -71,11 +71,23 @@ public class SignupController {
 
         // we have to give a role to the user, by default it is "ROLE_USER"
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+
+
         // save user into database
-        userService.registration(user);
+        User newUser = userService.registration(user);
+
+
+        // if registration went wrong (verification email weren't send) send error message)
+        if (newUser == null) {
+            model.addAttribute("errorMessage", "Something went wrong, verification email weren't send.");
+            return "signup/response";
+        }
+
+
+
         //After registration user goes to Success page that notifies him that email is send to his mail
-        model.addAttribute("message", "Verification email has been send. Please check your mailbox.");
-        return "signup/success";
+        model.addAttribute("successMessage", "Verification email has been send. Please check your mailbox.");
+        return "signup/response";
     }
 
 
@@ -121,7 +133,6 @@ public class SignupController {
             } else {
                 // the user account is already activated
                 model.addAttribute("message", "Your account is already activated.");
-
             }
         }
 

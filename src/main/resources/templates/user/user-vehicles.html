@@ -10,57 +10,82 @@
 
 
 <div layout:fragment="content">
-    <h1>User's Vehicles</h1>
 
-    <div th:unless="${userVehicles.empty}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Licence</th>
-                <th>Engine</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Mileage</th>
-                <th>Age</th>
-                <th>Details</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+    <!-- Masthead-->
+    <header class="masthead" id="mastheadTable">
 
-            <tr th:each="vehicle : ${userVehicles}">
-                <td th:text="${vehicle.vehicle_id}"></td>
-                <td th:text="${vehicle.type}"></td>
-                <td th:text="${vehicle.licence}"></td>
-                <td th:text="${vehicle.engine}"></td>
-                <td th:text="${vehicle.make}"></td>
-                <td th:text="${vehicle.model}"></td>
-                <td th:text="${vehicle.mileage}"></td>
-                <td th:text="${vehicle.age}"></td>
-                <td th:text="${vehicle.other_details}"></td>
-                <td>
-                    <form th:action="@{/user/vehicle/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
-                        <input class="btn btn-dark" type="submit" value="Delete">
-                    </form>
-                </td>
-                <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
-            </tr>
-            </tbody>
+    </header>
+    <!-- main body-->
+    <section class="projects-section bg-light" id="projects">
+        <div class="container">
+            <div class="container  h-100 align-items-center">
+                <div th:unless="${userVehicles.empty}">
+                    <h1 class="table-title">MY VEHICLES</h1>
+                    <!--users vehicles table-->
+                    <table class="display" id="myVehiclesTable" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Licence</th>
+                            <th>Engine</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Mileage</th>
+                            <th>Age</th>
+                            <th>Details</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-        </table>
-        <div class="text-center">
-            <a class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+                        <tr th:each="vehicle : ${userVehicles}">
+                            <td th:text="${vehicle.vehicle_id}"></td>
+                            <td th:text="${vehicle.type}"></td>
+                            <td th:text="${vehicle.licence}"></td>
+                            <td th:text="${vehicle.engine}"></td>
+                            <td th:text="${vehicle.make}"></td>
+                            <td th:text="${vehicle.model}"></td>
+                            <td th:text="${vehicle.mileage}"></td>
+                            <td th:text="${vehicle.age}"></td>
+                            <td th:text="${vehicle.other_details}"></td>
+                            <td>
+                                <div class="rows">
+                                    <div class="col-small">
+                                        <form th:action="@{/user/vehicle/update-form}" method="post">
+                                            <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
+                                            <input class="btn btn-primary btn-lg" type="submit" value="Update">
+                                        </form>
+                                    </div>
+                                    <div class="col-small">
+                                        <form th:action="@{/user/vehicle/delete}" method="post">
+                                            <input type="hidden" name="id" th:value="${vehicle.vehicle_id}">
+                                            <input class="btn btn-danger btn-lg" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <!-- <td><a th:href="@{/user/users/{id}(id=${user.id})}">Delete</a></td> -->
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="add-vehicle">
+                        <a class="btn btn-primary" role="button" th:href="@{/user/vehicle/}">Add a new Vehicle</a>
+                    </div>
+                </div>
+
+                <!--if no vehicles, show the link to a booking form-->
+
+                <div class="add-vehicle" th:unless="${!userVehicles.empty}">
+                    <p> You don't have any registered vehicles</p>
+                    <a class="btn btn-primary" role="button" th:href="@{/user/vehicle/}">Add a Vehicle</a>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-
-    <div th:unless="${!userVehicles.empty}">
-        <p> You don't have any registered vehicles</p>
-        <a class="btn btn-dark" role="button" th:href="@{/user/vehicle/}">Add a Vehicle</a>
-    </div>
 
 </div>
 </body>

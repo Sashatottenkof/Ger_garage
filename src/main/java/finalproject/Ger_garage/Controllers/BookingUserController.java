@@ -110,6 +110,19 @@ public class BookingUserController {
     }
 
     /**
+     * Delete Vehicle
+     * @param id
+     * @return
+     */
+    @PostMapping("booking/delete")
+    public String deleteBooking(@RequestParam Integer id) {
+
+        bookingService.deleteByBookingId(id);
+
+        return "redirect:../bookings?deleted";
+    }
+
+    /**
      * Display page with receipt for specific booking
      *
      * @param id

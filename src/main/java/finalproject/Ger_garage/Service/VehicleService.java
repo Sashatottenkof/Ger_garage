@@ -14,9 +14,52 @@ public class VehicleService {
     VehicleRepository vehicleRepository;
 
 
-    public Collection<Vehicle> findByUser(User user){return vehicleRepository.findByUser(user);};
+    public Collection<Vehicle> findByUser(User user) {
+        return vehicleRepository.findByUser(user);
+    }
 
-    public void deleteVehicleById(Integer id){vehicleRepository.deleteById(id);};
+    /**
+     * delete Vehicle
+     * @param id
+     * @return
+     */
+    public boolean deleteVehicleById(Integer id) {
+        try {
+            vehicleRepository.deleteById(id);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 
-    public void saveVehicle(Vehicle vehicle){vehicleRepository.save(vehicle);};
+
+    public void saveVehicle(Vehicle vehicle) {
+        vehicleRepository.save(vehicle);
+    }
+
+
+    public Vehicle findVehicleById(Integer id) {
+        return vehicleRepository.findById(id).get();
+    }
+
+    /**
+     * Update Vehicle
+     * @param update
+     */
+
+    public void update(Vehicle update) {
+
+        Vehicle originalVehicle = findVehicleById(update.getVehicle_id());
+
+        originalVehicle.setAge(update.getAge());
+        originalVehicle.setEngine(update.getEngine());
+        originalVehicle.setLicence(update.getLicence());
+        originalVehicle.setMake(update.getMake());
+        originalVehicle.setMileage(update.getMileage());
+        originalVehicle.setModel(update.getModel());
+        originalVehicle.setOther_details(update.getOther_details());
+
+        saveVehicle(originalVehicle);
+
+    }
 }

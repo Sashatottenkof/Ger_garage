@@ -5,7 +5,7 @@
       layout:decorate="~{layout}">
 <head>
 
-    <title>User details</title>
+    <title>User Vehicle</title>
 </head>
 <body>
 <!--    <div>-->
@@ -18,104 +18,95 @@
     <header class="masthead" id="mastheadTable">
     </header>
 
-    <!-- user details-->
+    <!-- vehicle details-->
     <section class="projects-section bg-light" id="projects">
         <div class="container">
 
 
-                <h1 class="table-title"> MY DETAILS </h1>
-                <div class="container">
+            <h1 class="table-title"> My Vehicle Details </h1>
+            <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-id-card-alt fa-lg"></i>
-                        <label> User Id:</label>
+                        <label> Vehicle Id:</label>
                     </div>
                     <div class="col-md-6">
-                        <p th:text="${userId.id}"></p>
+                        <p th:text="${vehicle.vehicle_id}"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-id-card-alt fa-lg"></i>
-                        <label>User Name:</label>
+                        <label>Type:</label>
                     </div>
                     <div class="col-md-6">
-                        <p th:text="${userId.username}"></p>
+                        <p th:text="${vehicle.type}"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-envelope-square fa-lg"></i>
-                        <label>Email:</label>
+                        <label>Lincence Plate:</label>
                     </div>
 
                     <div class="col-md-6">
-                        <p th:text="${userId.email}">
+                        <p th:text="${vehicle.licence}">
                         </p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-signature fa-lg"></i>
-                        <label>First Name:</label>
+                        <label>Engine Type:</label>
                     </div>
                     <div class="col-md-6">
-                        <p th:text="${userId.first_name}">
+                        <p th:text="${vehicle.engine}">
                         </p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-signature fa-lg"></i>
-                        <label>Last Name:</label>
+                        <label>Make:</label>
                     </div>
 
                     <div class="col-md-6">
-                        <p th:text="${userId.last_name}"></p>
+                        <p th:text="${vehicle.make}"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-venus-mars fa-lg"></i>
-                        <label>Gender:</label>
+                        <label>Model:</label>
                     </div>
 
                     <div class="col-md-6">
-                        <p th:text="${userId.gender}"></p>
+                        <p th:text="${vehicle.model}"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-phone-volume fa-lg"></i>
-                        <label>Phone Number:</label>
+                        <label>Mileage:</label>
                     </div>
-                    <div class="col-md-6" th:unless="${userId.phone_number == null}">
-                        <p th:text="${userId.phone_number}"></p>
-                    </div>
-
-                    <div class="col-md-6" th:unless="${userId.phone_number != null}">
-                        <p>None</p>
+                    <div class="col-md-6">
+                        <p th:text="${vehicle.mileage}"></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <i class="fas fa-birthday-cake fa-lg"></i>
-                        <label>Date Of Birth:</label>
+                        <label>Age:</label>
                     </div>
                     <div class="col-md-6">
-                        <p th:text="${userId.date_of_birth}"></p>
+                        <p th:text="${vehicle.age}"></p>
                     </div>
                 </div>
-                <div class="change-details">
-                <a class="btn btn-primary" role="button" type="button" th:href="@{/user/update}">Change
-                    the
-                    Details</a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Additional Details:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p th:text="${vehicle.other_details}"></p>
+                    </div>
                 </div>
             </div>
 

@@ -44,13 +44,6 @@ public class UserController {
      * @throws NotFoundException
      */
 
-//	@GetMapping("details")
-//	public String displayUser(  @AuthenticationPrincipal User currentUser, Model model) throws NotFoundException {
-//		User user = (User) userRepository.findByEmail(currentUser.getUsername());
-//		 model.addAttribute("userId", user);
-////		userRepository.findById(id).ifPresent(user -> model.addAttribute("userId", user));
-//		return "user/user";
-//	}
     @GetMapping("details")
     public String displayUser(Principal principal, Model model) throws NotFoundException {
         User user = userService.findByEmail(principal.getName());
@@ -72,13 +65,6 @@ public class UserController {
         model.addAttribute("updatedUser", user);
         return "user/update-user";
     }
-//	@GetMapping("update/{id}")
-//	public String displayUpdateForm(@PathVariable("id") Integer id, Model model) {
-//		
-//		userRepository.findById(id).ifPresent(user -> model.addAttribute("userId", user));
-////		model.addAttribute(Gender.values());
-//	 return "user/update-user";
-//	}
 
     /**
      * Update user details
@@ -117,74 +103,5 @@ public class UserController {
         return "redirect:../details?success";
     }
 
-
-//	@PostMapping("update/{id}")
-//	public String updateUser( @PathVariable("id") Integer id, @ModelAttribute @Valid User user, Errors errors, Model model, Principal principal) {
-//		
-//		userRepository.findById(id).ifPresent(newUser -> model.addAttribute("userId", user));
-//		if(errors.hasErrors()) {
-//			user.setId(id);
-//			return "user/update-user";
-//		}
-//		userRepository.save(user);
-//		
-//		return "user/user";
-//	}
-
-
-//	@GetMapping("/user/{id}")
-//	public User getUser(@PathVariable Integer id) throws NotFoundException {
-//		Optional<User> user = userRepository.findById(id);
-//		if (user.isPresent()) {
-//			return user.get();
-//		} else {
-//			throw new NotFoundException("User not found with id " + id);
-//		}
-//	}
-
-//	@PutMapping("/user/{id}")
-//	public String updateUser(@RequestBody User user, @PathVariable Integer id) {
-//		 userRepository.findById(id)
-//			      .map(oldUser -> {
-//			    	  oldUser.setFirst_name(user.getFirst_name());
-//			    	  oldUser.setLast_name(user.getLast_name());
-//			        return userRepository.save(oldUser);
-//			      });
-//		 return "updated";
-//		 
-//			   
-////		Optional<User> oldUser = userRepository.findById(id);
-////		oldUser.get().setFirst_name(user.getFirst_name());
-////		userRepository.save(oldUser.get());
-////		return "Deleted";
-//	}
-
-//	@DeleteMapping("/user/{id}")
-//	public String deleteUser(@PathVariable Integer id) {
-//		userRepository.deleteById(id);
-//		return "Deleted";
-
-
-//	}
-//	@GetMapping("users/{id}")
-//	public String deleteUser(@PathVariable("id") Integer id) {
-//	
-//		userRepository.deleteById(id);
-//
-//		
-//		return "redirect:";
-//	}
-
-//	@PostMapping("/add")
-//	public String addUser(@RequestBody User user) {
-//		userRepository.save(user);
-//		return "Saved";
-//	}
-
-
-//	@GetMapping("/users")
-//	public Iterable<User> getAllUsers() {
-//		return userRepository.findAll();
-//	}
 
 }

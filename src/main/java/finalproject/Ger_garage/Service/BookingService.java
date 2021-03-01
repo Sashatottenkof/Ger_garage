@@ -25,6 +25,8 @@ public class BookingService {
 
     public Collection <Booking> findByUser(User user){return bookingRepository.findByUser(user);}
 
+    public void deleteByBookingId(Integer id){bookingRepository.deleteById(id);}
+
     /**
      * Find if the booking already exists
      * @param booking
