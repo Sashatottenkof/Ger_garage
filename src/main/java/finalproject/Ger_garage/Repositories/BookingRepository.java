@@ -30,30 +30,30 @@ public interface BookingRepository extends CrudRepository<Booking, Integer>{
 
 
 	//checking booking with the same date and time
-	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:newDate) AND TIME(time) = TIME(:newTime)", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE date = :newDate AND time = :newTime", nativeQuery = true)
 	public Booking findByDateAndTime(@Param("newDate") LocalDate date, @Param("newTime")  LocalTime time);
 
 //	@Query(value = "SELECT * FROM booking_request WHERE date > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY date DESC", nativeQuery = true)
 
 	//current month
-	@Query(value = "SELECT * FROM booking_request WHERE MONTH(date) = MONTH(NOW()) ORDER BY date ASC", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE EXTRACT(MONTH FROM date) =  EXTRACT(MONTH FROM CURRENT_DATE) ORDER BY date ASC", nativeQuery = true)
 	public Iterable<Booking> thisMonthBookings();
 
 	//current week
-	@Query(value = "SELECT * FROM booking_request WHERE YEARWEEK(date) = YEARWEEK(NOW()) ORDER BY date ASC", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE EXTRACT(WEEK FROM date) = EXTRACT(WEEK FROM CURRENT_DATE) ORDER BY date ASC", nativeQuery = true)
 	public Iterable<Booking> thisWeekBookings();
 
 
 	//current day
-	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(NOW())", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE EXTRACT(DAY FROM date) = EXTRACT(DAY FROM CURRENT_DATE)", nativeQuery = true)
 	public Iterable<Booking> todayBookings();
 
 	//bookings on a specific day
-	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:pickedDay)", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE date = :pickedDay", nativeQuery = true)
 	public Iterable<Booking> dayPickerBookings(@Param("pickedDay") LocalDate date);
 
 	//bookings of specific mechanic on specific day
-	@Query(value = "SELECT * FROM booking_request WHERE DAY(date) = DAY(:pickedDay) AND MECHANIC_ID = :mechanic", nativeQuery = true)
+	@Query(value = "SELECT * FROM booking_request WHERE date = :pickedDay AND MECHANIC_ID = :mechanic", nativeQuery = true)
 	public List<Booking> mechanicBookings(@Param("pickedDay") LocalDate date,@Param("mechanic")  Integer Id);
 
 //	public Booking findByVehicle_id();

@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Type;
 import org.springframework.core.SpringVersion;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -63,6 +64,7 @@ public class Booking {
     private BookingDate bookingDate;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String comment;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

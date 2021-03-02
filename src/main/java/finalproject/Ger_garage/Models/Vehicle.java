@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -63,6 +64,7 @@ public class Vehicle {
 
 	
 	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	// for large amount information
 	private String other_details;
 

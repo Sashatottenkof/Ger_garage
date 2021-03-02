@@ -128,6 +128,10 @@ public class AdminController {
             errors.rejectValue("date", null, "You have to choose a day");
             return "admin/bookings";
         }
+        //if user haven't chosen a date
+        if(parameterDate.getDate()==null) {
+            return "admin/bookings";
+        }
 
         LocalDate date = parameterDate.getDate();
 

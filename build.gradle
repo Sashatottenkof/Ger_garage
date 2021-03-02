@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
 }
 
 group = 'finalproject'
@@ -9,65 +9,65 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
 
 
-	// to connect to database
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // to connect to database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	//To use @valid annotations 
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //To use @valid annotations
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// To use Spring Boot security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+    // To use Spring Boot security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	// database type
-	runtimeOnly 'mysql:mysql-connector-java'
+    // database type
 
-	// Email service
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
+//	runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'org.postgresql:postgresql'
 
-	// to use autoloader to save time in developing
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // Email service
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	//thymeleaf template engine
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // to use autoloader to save time in developing
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	//Thymeleaf security requered for rendering authentificated user on html page
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    //thymeleaf template engine
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-	//layout dialect for thymeleaf
-	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.1'
-	/**
-	 * Webjars
-	 */
+    //Thymeleaf security requered for rendering authentificated user on html page
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-	// webjar for bootstrap
-	implementation 'org.webjars:bootstrap:4.5.0'
+    //layout dialect for thymeleaf
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.1'
+    /**
+     * Webjars
+     */
 
-	// uploads tempusdominus a JavaScript library for creating datetime pickers.
-	implementation 'org.webjars:webjars-locator:0.40'
+    // webjar for bootstrap
+    implementation 'org.webjars:bootstrap:4.5.0'
 
-	//styling icons
-	implementation 'org.webjars:font-awesome:5.13.1'
+    // uploads tempusdominus a JavaScript library for creating datetime pickers.
+    implementation 'org.webjars:webjars-locator:0.40'
 
-	//date-time picker
-	implementation 'org.webjars:bootstrap-datetimepicker:6aa746736d'
+    //styling icons
+    implementation 'org.webjars:font-awesome:5.13.1'
+
+    //date-time picker
+    implementation 'org.webjars:bootstrap-datetimepicker:6aa746736d'
 
 
-
-	  
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
