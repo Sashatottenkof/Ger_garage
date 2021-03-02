@@ -1,4 +1,28 @@
-# Ger_garage
+## Deployment
+
+The App is deployd on free hosting provided by Heroku.
+
+https://glacial-inlet-14504.herokuapp.com/
+
+Default users:
+
+email: admin@gmail.com; pass: 1111;
+email: user@gmail.com; pass: 2222;
+
+## To Start
+
+
+The application is set up for PostgreSQL Database, so you need to change application.properties file to connect to your 
+own database. It also can be changed to mySQL with minor changes.
+
+
+Change email settings to use your email for notification purposes;
+
+http://localhost:8080/
+
+
+
+# General description
 
 The Web application is designed for small car-repair shop “Ger’s Garage”. 
 The shop carries out maintenance checks for all kinds of small to medium vehicles (i.e. motorbikes, cars, small vans and small buses).
@@ -7,16 +31,15 @@ The shop has small number of staff who work there.
 Web service allows customers to book their vehicles for a check-up or service.
 
 
-Car-repair shop, It’s a Web project using Spring Framework in java, Spring Boot in back-end with 
-Thymeleaf template engine for manage front-end, 
-In addition to Spring Security to handle authentication and authorization,
-And Java Persistence API (JPA) with entity manager to handle MySql connector with database. The Service
-follows three-layer architecture.
-Entity classes defined and two Structural Patterns Services and Dao(Repositories),
-And using Gradle build tool to manage project architecture for classes, resources and dependencies. 
+The back-end is implemented with Spring Boot framework with 
+Thymeleaf template engine for managing front-end.
+Authentication and authorization is handled by Spring Security Service.
+Hibernate is used as JPA to establish an interaction with database(PostgreSQL). The Service
+follows three-layer architecture (Controller-Service-Repository).
+Gradle is used as a  build automation tool to manage project architecture for classes, resources and dependencies. 
 
 
-## Web Service Requirements:
+## Project Requirements:
 
 1) Customer has to be able to register on the website;
 2) Customers details and information about his bookings should be saved in the service system;
@@ -42,6 +65,7 @@ Physical Data Base Design
 ![Functionality](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/Functionality.png)
 General look at New Visitor Functionality
 
+
 ## Web Service has additional features:
 
 • Users email verification and email notification after successful registration;
@@ -50,14 +74,19 @@ General look at New Visitor Functionality
 
 • User can alter its details after registration;
 
+![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/Booking-Form.png)
+Booking Form
+
+
+![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/Admin-Dashboard.png)
+Admin dashboard
+
 
 ## During the development following tools and technologies are being used:
 
 • SpringBoot - a core of backend; 
 
-• MySQL - data base;
-
-• Workbench;
+• PostgreSQL - data base;
 
 • Hibernate -  to set up connection between java source code and MySQL database and manipulate data with little coding;
 
@@ -73,27 +102,8 @@ General look at New Visitor Functionality
 
 • Bootstrap;
 
-• Docker - was used to run a database during development part and deploy whole web application on the Google Cloud Platform.
+• Docker - was used to run a database during its development process and deploy whole web application on the Google Cloud Platform.
 
-• Google Engine - was used as a live-server to deploy the app;
-
-## To Start
+• Google Engine - was used as a live-server to deploy the app for testing;
 
 
-Change email settings to use your email for notification purposes;
-
-Set up a database in a Docker container or any other suitable way. 
-
-Settings for docker container:
-
-
-**$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql**
-
-**192.168.99.100:3306/Ger_garage**
-
-http://localhost:8080/
-
-Default users:
-
-email: admin@gmail.com; pass: 1111;
-email: user@gmail.com; pass: 2222;
