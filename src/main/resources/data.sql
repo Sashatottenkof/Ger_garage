@@ -1,13 +1,13 @@
---delete from  verification_token;
---delete from  items;
---delete from  item;
---delete from  booking_request;
---delete from vehicle;
---delete from  users_roles;
---delete from  role;
---delete from  user_details;
---delete from  mechanics;
---delete from  persistent_logins;
+delete from  verification_token;
+delete from  items;
+delete from  item;
+delete from  booking_request;
+delete from vehicle;
+delete from  users_roles;
+delete from  role;
+delete from  user_details;
+delete from  mechanics;
+delete from  persistent_logins;
 
 create table if not exists persistent_logins (
      username varchar(100) not null,
