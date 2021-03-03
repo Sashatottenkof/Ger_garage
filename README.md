@@ -2,7 +2,7 @@
 
 The App is deployd on free hosting provided by Heroku.
 
-https://glacial-inlet-14504.herokuapp.com/
+https://gergarage.herokuapp.com/
 
 Default users:
 
