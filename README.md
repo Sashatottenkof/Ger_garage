@@ -1,6 +1,6 @@
 ## Deployment
 
-The App is deployd on free hosting provided by Heroku.
+The App is deployed on free hosting provided by Heroku.
 
 https://gergarage.herokuapp.com/
 
