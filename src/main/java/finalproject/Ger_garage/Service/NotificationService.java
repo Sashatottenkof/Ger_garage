@@ -14,6 +14,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 @Service
 public class NotificationService {
@@ -23,7 +24,8 @@ public class NotificationService {
     private VerificationTokenService verificationTokenService;
     @Autowired
     private TemplateEngine templateEngine;
-
+    @Autowired
+    private Properties properties;
     /**
      * Verification email
      * @param user
@@ -46,7 +48,7 @@ public class NotificationService {
             MimeMessage mail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(user.getEmail());
-            helper.setFrom("gersgarage@repairman.com");
+            helper.setFrom("gersgarage@outlook.com");
             helper.setSubject("email address verification");
             helper.setText(body, true);
 
@@ -68,7 +70,7 @@ public class NotificationService {
         // send email
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
-        mail.setFrom("gersgarage@repairman.com");
+        mail.setFrom(properties.getProperty("spring.mail.username"));
         mail.setSubject("Greeting");
         mail.setText("Thank you for registering!");
         javaMailSender.send(mail);

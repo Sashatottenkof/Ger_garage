@@ -57,8 +57,8 @@ Gradle is used as a  build automation tool to manage project architecture for cl
 14) Owner can add additional item to the cost of service;
 15) Owner needs to be able to print an “invoice” or bill for each customer when the service/repair is complete. This should provide an itemised bill for the customer.
 
-
-![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/DataBase_schema.png)
+e_schema.png)
+![DataBase design](https://github.com/Sashatottenkof/Ger_garage/blob/master/src/main/resources/static/images/GitHub_Images/DataBas
 Physical Data Base Design
 
 
